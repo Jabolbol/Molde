@@ -35,140 +35,72 @@ export default [
       {
         _name: 'CSidebarNavDropdown',
         name: 'Base',
-        route: '/base',
+        route: '/components',
         icon: 'cil-puzzle',
         items: [
           {
             name: 'Breadcrumbs',
-            to: '/base/breadcrumbs'
+            to: '/components/breadcrumbs'
           },
           {
             name: 'Cards',
-            to: '/base/cards'
+            to: '/components/cards'
           },
           {
             name: 'Carousels',
-            to: '/base/carousels'
+            to: '/components/carousels'
           },
           {
             name: 'Collapses',
-            to: '/base/collapses'
+            to: '/components/collapses'
           },
           {
             name: 'Forms',
-            to: '/base/forms'
+            to: '/components/forms'
           },
           {
             name: 'Jumbotrons',
-            to: '/base/jumbotrons'
+            to: '/components/jumbotrons'
           },
           {
             name: 'List Groups',
-            to: '/base/list-groups'
+            to: '/components/list-groups'
           },
           {
             name: 'Navs',
-            to: '/base/navs'
+            to: '/components/navs'
           },
           {
             name: 'Navbars',
-            to: '/base/navbars'
+            to: '/components/navbars'
           },
           {
             name: 'Paginations',
-            to: '/base/paginations'
+            to: '/components/paginations'
           },
           {
             name: 'Popovers',
-            to: '/base/popovers'
+            to: '/components/popovers'
           },
           {
             name: 'Progress Bars',
-            to: '/base/progress-bars'
+            to: '/components/progress-bars'
           },
           {
             name: 'Switches',
-            to: '/base/switches'
+            to: '/components/switches'
           },
           {
             name: 'Tables',
-            to: '/base/tables'
+            to: '/components/tables'
           },
           {
             name: 'Tabs',
-            to: '/base/tabs'
+            to: '/components/tabs'
           },
           {
             name: 'Tooltips',
-            to: '/base/tooltips'
-          }
-        ]
-      },
-      {
-        _name: 'CSidebarNavDropdown',
-        name: 'Buttons',
-        route: '/buttons',
-        icon: 'cil-cursor',
-        items: [
-          {
-            name: 'Buttons',
-            to: '/buttons/standard-buttons'
-          },
-          {
-            name: 'Button Dropdowns',
-            to: '/buttons/dropdowns'
-          },
-          {
-            name: 'Button Groups',
-            to: '/buttons/button-groups'
-          },
-          {
-            name: 'Brand Buttons',
-            to: '/buttons/brand-buttons'
-          }
-        ]
-      },
-      {
-        _name: 'CSidebarNavDropdown',
-        name: 'Icons',
-        route: '/icons',
-        icon: 'cil-star',
-        items: [
-          {
-            name: 'CoreUI Icons',
-            to: '/icons/coreui-icons',
-            badge: {
-              color: 'info',
-              text: 'NEW'
-            }
-          },
-          {
-            name: 'Brands',
-            to: '/icons/brands'
-          },
-          {
-            name: 'Flags',
-            to: '/icons/flags'
-          }
-        ]
-      },
-      {
-        _name: 'CSidebarNavDropdown',
-        name: 'Notifications',
-        route: '/notifications',
-        icon: 'cil-bell',
-        items: [
-          {
-            name: 'Alerts',
-            to: '/notifications/alerts'
-          },
-          {
-            name: 'Badges',
-            to: '/notifications/badges'
-          },
-          {
-            name: 'Modals',
-            to: '/notifications/modals'
+            to: '/components/tooltips'
           }
         ]
       },

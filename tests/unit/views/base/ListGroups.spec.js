@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import { shallowMount } from '@vue/test-utils'
 import CoreuiVue from '@coreui/vue'
-import ListGroups from '@/views/base/ListGroups'
+import ListGroups from '@/views/components/ListGroups'
 
 Vue.use(CoreuiVue)
 
