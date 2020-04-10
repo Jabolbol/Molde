@@ -71,9 +71,9 @@ export default {
       })
       .then(success => {
         this.$router.push("/")
-
       })
       .catch(error => {
+        alert("Login failed")
         this.error  = true;
       })
     }
