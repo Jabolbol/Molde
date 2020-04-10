@@ -13,107 +13,37 @@ export default [
         }
       },
       {
-        _name: 'CSidebarNavTitle',
-        _children: ['Theme']
+        _name: 'CSidebarNavTitle'
+      },
+
+      {
+        _name: 'CSidebarNavTitle'
       },
       {
         _name: 'CSidebarNavItem',
         name: 'Products',
-        to: '/theme/typography',
+        to: '/components/products',
         icon: 'cil-star'
       },
       {
-        _name: 'CSidebarNavItem',
-        name: 'Statistic',
-        to: '/charts',
-        icon: 'cil-chart-pie'
-      },
-      {
-        _name: 'CSidebarNavTitle',
-        _children: ['Components']
-      },
-      {
         _name: 'CSidebarNavDropdown',
-        name: 'Base',
-        route: '/components',
-        icon: 'cil-puzzle',
+        name: 'Orders',
+        to: '/components',
+        icon: 'cil-chart-pie',
         items: [
           {
-            name: 'Breadcrumbs',
-            to: '/components/breadcrumbs'
+            name: 'Menunggu Pembayaran',
+            to: '/components/MenungguPembayaran'
           },
           {
-            name: 'Cards',
-            to: '/components/cards'
+            name: 'Dalam Pengiriman',
+            to: '/components/DalamPengiriman'
           },
           {
-            name: 'Carousels',
-            to: '/components/carousels'
-          },
-          {
-            name: 'Collapses',
-            to: '/components/collapses'
-          },
-          {
-            name: 'Forms',
-            to: '/components/forms'
-          },
-          {
-            name: 'Jumbotrons',
-            to: '/components/jumbotrons'
-          },
-          {
-            name: 'List Groups',
-            to: '/components/list-groups'
-          },
-          {
-            name: 'Navs',
-            to: '/components/navs'
-          },
-          {
-            name: 'Navbars',
-            to: '/components/navbars'
-          },
-          {
-            name: 'Paginations',
-            to: '/components/paginations'
-          },
-          {
-            name: 'Popovers',
-            to: '/components/popovers'
-          },
-          {
-            name: 'Progress Bars',
-            to: '/components/progress-bars'
-          },
-          {
-            name: 'Switches',
-            to: '/components/switches'
-          },
-          {
-            name: 'Tables',
-            to: '/components/tables'
-          },
-          {
-            name: 'Tabs',
-            to: '/components/tabs'
-          },
-          {
-            name: 'Tooltips',
-            to: '/components/tooltips'
+            name: 'Selesai',
+            to: '/components/Selesai'
           }
         ]
-      },
-      {
-        _name: 'CSidebarNavItem',
-        name: 'Widgets',
-        to: '/widgets',
-        icon: 'cil-calculator',
-        badge: {
-          color: 'primary',
-          text: 'NEW',
-          shape: 'pill'
-        }
       },
       {
         _name: 'CSidebarNavDivider',

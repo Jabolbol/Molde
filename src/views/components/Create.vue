@@ -14,7 +14,7 @@
                                 type="textfield"
                                 class="form-control"
                                 placeholder="Masukkan nama barang"
-                                v-model="form.firstName"
+                                v-model="form.name"
                                 required
                         >
                     </div>
@@ -24,7 +24,7 @@
                                 type="textfield"
                                 class="form-control"
                                 placeholder="Masukkan Deskripsi"
-                                v-model="form.lastName"
+                                v-model="form.description"
                                 required
                         >
                     </div>
@@ -34,7 +34,7 @@
                                 type="textfield"
                                 class="form-control"
                                 placeholder="Masukkan Deskripsi"
-                                v-model="form.lastName"
+                                v-model="form.weight"
                                 required
                         >
                     </div>
@@ -44,7 +44,7 @@
                                 type="textfield"
                                 class="form-control"
                                 placeholder="Masukkan Deskripsi"
-                                v-model="form.lastName"
+                                v-model="form.prize"
                                 required
                         >
                     </div>
@@ -54,14 +54,14 @@
                                 type="textfield"
                                 class="form-control"
                                 placeholder="Masukkan Deskripsi"
-                                v-model="form.lastName"
+                                v-model="form.stock"
                                 required
                         >
                     </div>
-                    <div>
-                        <input type="file" id="gambar_profil">
-                        <button id="btnUpload"></button>
-                    </div>
+<!--                    <div>-->
+<!--                        <input type="file" id="gambar_profil">-->
+<!--                        <button id="btnUpload"></button>-->
+<!--                    </div>-->
 
                     <button class="btn btn-primary">Submit</button>
                 </form>
@@ -75,8 +75,11 @@
         data(){
             return{
                 form:{
-                    firstName: '',
-                    lastName: ''
+                    name: '',
+                    description: '',
+                    wight: '',
+                    prize: '',
+                    stock: ''
                 }
             }
         },
@@ -84,9 +87,12 @@
             addData() {
                 // post data ke api menggunakan axios
                 axios
-                    .post("http://localhost:8000/api/person", {
-                        first_name: this.form.firstName,
-                        last_name: this.form.lastName
+                    .post("http://localhost:9000/molde/api/v1/product/add", {
+                        name: this.form.name,
+                        description: this.form.description,
+                        weight: this.form.weight,
+                        prize: this.form.prize,
+                        stock: this.form.stock
                     })
                     .then(response => {
                         // push router ke read data
