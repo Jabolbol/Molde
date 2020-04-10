@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+
 // Containers
 const TheContainer = () => import('@/containers/TheContainer')
 
