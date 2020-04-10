@@ -2,6 +2,7 @@
   <CContainer class="d-flex content-center min-vh-100">
     <CCard class="p-4">
             <CCardBody>
+
               <Form  @submit="login">
                 <h1>Login</h1>
 
@@ -24,13 +25,14 @@
 
                 <CRow>
                   <CCol col="6" class="text-left">
-                    <CButton type="submit" color="primary" class="px-4" @click="submit">Login</CButton>
+                    <CButton type="submit" color="primary" class="px-4" @click.prevent="login()">Login</CButton>
                   </CCol>
                   
                   <CCol col="6" class="text-right">
                     <router-link to='./register' class="btn btn-link">Register</router-link>
                   </CCol>
                 </CRow>
+              
 
               </Form>
             </CCardBody>
@@ -41,31 +43,40 @@
 <script>
 export default {
   name: 'login',
-  data() {
-    return {
+  data: () => ({
       email: '',
-      password: '' 
-    }
-  }, 
+      password: '',
+      error: false
+    
+  }), 
   methods: {
+    // login() {
+    //   this.axios.post('http://localhost:9000/molde/api/v1/login', {
+    //     email: this.email,
+    //     password: this.password
+    //   })
+    //   .then(function(response) {
+    //     console.log(response.data)
+    //   })
+    //   .catch(function(error) {
+    //     console.log(error)
+    //   })
+    // }
     login() {
-      this.axios.post('http://localhost:9000/molde/api/v1/login', {
+      console.log(this.$store);
+      
+      this.$store.dispatch("LOGIN", {
         email: this.email,
         password: this.password
       })
-      .then(function(response) {
-        console.log(response.data)
+      .then(success => {
+        this.$router.push("/")
+
       })
-      .catch(function(error) {
-        console.log(error)
+      .catch(error => {
+        this.error  = true;
       })
     }
-    // login() {
-    //   this.$store.dispatch('retrieveToken', {
-    //     username: this.username,
-    //     password: this.password
-    //   })
-    // }
   }
 };
 </script>
