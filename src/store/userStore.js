@@ -30,19 +30,18 @@ export default {
     actions: {
         LOGIN: ({commit}, payload) => {
           return  new Promise((resolve, reject) => {
-            axios
             axios.post('login', payload)
-            .then(({data, status}) => { 
-                if(status === 200) {
-                    resolve(true)
-
-                }
-            })
-            .catch (error => {
-                reject(error);
-            })
+                .then(({data, status}) => { 
+                    if(data.code == 200) {
+                        resolve(true)
+                    }else{
+                        reject(false)
+                    }
+                })
+                .catch (error => {
+                    reject(error);
+                })
           });
-
         }
     //     getProfileDetail ({commit}, userId) {
     //         Axios

@@ -13,10 +13,8 @@ Vue.use(VueAxios, axios)
 Vue.config.performance = true
 Vue.use(CoreuiVue)
 Vue.prototype.$log = console.log.bind(console)
-// Vue.use(axios)
 
-
-// axios.defaults.baseURL = 'http://localhost:9000/molde/api/v1/login'
+axios.defaults.baseURL = 'http://localhost:9000/molde/api/v1/'
 
 new Vue({
   el: '#app',
