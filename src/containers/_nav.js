@@ -14,7 +14,7 @@ export default [
       },
       {
         _name: 'CSidebarNavTitle',
-        _children: ['Theme']
+        _children: ['Molde']
       },
       {
         _name: 'CSidebarNavItem',
@@ -26,6 +26,30 @@ export default [
         _name: 'CSidebarNavItem',
         name: 'Statistic',
         to: '/charts',
+        icon: 'cil-chart-pie'
+      },
+      {
+        _name: 'CSidebarNavItem',
+        name: 'Toko',
+        to: '/base/tables',
+        icon: 'cil-chart-pie'
+      },
+      {
+        _name: 'CSidebarNavItem',
+        name: 'User',
+        to: '/users',
+        icon: 'cil-chart-pie'
+      },
+      {
+        _name: 'CSidebarNavItem',
+        name: 'Register',
+        to: '/pages/register',
+        icon: 'cil-chart-pie'
+      },
+      {
+        _name: 'CSidebarNavItem',
+        name: 'Logout',
+        to: '/pages/login',
         icon: 'cil-chart-pie'
       },
       {
