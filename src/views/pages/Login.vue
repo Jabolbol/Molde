@@ -50,18 +50,6 @@ export default {
     
   }), 
   methods: {
-    // login() {
-    //   this.axios.post('http://localhost:9000/molde/api/v1/login', {
-    //     email: this.email,
-    //     password: this.password
-    //   })
-    //   .then(function(response) {
-    //     console.log(response.data)
-    //   })
-    //   .catch(function(error) {
-    //     console.log(error)
-    //   })
-    // }
     login() {
       console.log(this.$store);
       

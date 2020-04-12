@@ -8,77 +8,75 @@
             <h1>Register</h1>
             <p class="text-muted">Create your account</p>
             
-        <CForm class="register-form" @submit.prevent="validateForm">
+        <CForm class="register-form" @submit="register">
+            <!-- <v-alert
+            :value="userExist"
+            color="error"
+            icon="warning"
+            >This user already exists, try a different set of data.</v-alert> -->
+            
             <CInput
                 placeholder="Firstname"
-                autocomplete="fname"
+                :rules="[rules.required]"
                 type="text"
-                v-model="firstname"
-            >
-            <template #prepend-content><CIcon name="cil-user"/></template>
+                v-model="firstname">
+                <template #prepend-content><CIcon name="cil-user"/></template>
             </CInput>
 
             <CInput
                 placeholder="Lastname"
-                autocomplete="lname"
+                :rules="[rules.required]"
                 type="text"
-                v-model="lastname"
-            >
-            <template #prepend-content><CIcon name="cil-user"/></template>
-            </CInput>
-
-            <CInput
-                placeholder="Username"
-                autocomplete="username"
-                type="text"
-                v-model="username"
-            >
-            <template #prepend-content><CIcon name="cil-user"/></template>
+                v-model="lastname">
+                <template #prepend-content><CIcon name="cil-user"/></template>
             </CInput>
 
             <CInput
                 placeholder="Email"
-                autocomplete="email"
+                :rules="[rules.required, rules.email]"
                 type="email"
                 v-model="email"
-                prepend="@"
-            />
+                prepend="@"> 
+            </CInput>
+            
             <CInput
                 placeholder="Password"
                 type="password"
                 v-model="password"
-                autocomplete="new-password"
-            >
-            <template #prepend-content><CIcon name="cil-lock-locked"/></template>
+                :rules="[rules.required]">
+                <template #prepend-content><CIcon name="cil-lock-locked"/></template>
             </CInput>
+
             <CInput
                 placeholder="Repeat password"
                 type="password"
-                autocomplete="new-password"
-                class="mb-4"
-            >
-            <template #prepend-content><CIcon name="cil-lock-locked"/></template>
+                :rules="[rules.required]"
+                v-model="confirm_password"
+                
+                class="mb-4" >
+                <template #prepend-content><CIcon name="cil-lock-locked"/></template>
             </CInput>
+            
             <CInput
                 placeholder="Phone Number"
                 autocomplete="phoneNumber"
                 type="number"
                 v-model="number"
-                prepend="@"
-            />
-            <p v-if="isAuthError===true" style="color: red; font-size: 14px">{{authMessageError}}</p>
+                prepend="@">
+            </CInput>
+                <!-- <p v-if="isAuthError===true" style="color: red; font-size: 14px">{{authMessageError}}</p> -->
             <CRow>
                 <CCol col="6" class="text-left">
-                    <CButton type="submit" color="primary" @click="submit" block>Register</CButton>
+                    <CButton type="submit" color="primary" block @click.prevent="register()">Register</CButton>
                 </CCol>
                 <CCol col="6" class="text-center">
                     <router-link to='./login' class="btn btn-link" >Cancel</router-link>
                 </CCol>
             </CRow>
-            </CForm>
+        </CForm>
         </CCardBody>
         <CCardFooter class="p-4">
-    </CCardFooter>
+        </CCardFooter>
         </CCard>
         </CCol>
     </CRow>
@@ -88,35 +86,59 @@
 
 <script>
 
-import {mapGetters} from 'vuex'
+// import {mapGetters} from 'vuex'
 export default {
-  name: 'Register',
-  data() {
-      return {
-          firstname: '',
-          lastname: '',
-          username: '',
-          email: '',
-          password: '',
-          number: ''
-      }
-  },
-  computed: {
-      ...mapGetters([
-          'isAuthError', 'authMessageError'
-      ])
-  },
-  methods: {
-      validateForm() {
-          this.$store.dispatch('', {
-              firstname: this.username,
-              lastname: this.lastname,
-              username:  this.username,
-              email:  this.email,
-              password:  this.password,
-              number:  this.number
-          })
-      }
-  }
+name: "register",
+data: () => ({
+    userExist: false,
+    firstname:'',
+    lastname: '',
+    email: '',
+    number: '',
+    password: '',
+    confirm_password: '',
+    rules: {
+        required: value => !!value || "Required",
+        email: value => {
+            //   const pattern = /^(([^<>()[\]\\.,;:\$@"]+(\.[^<>()[\]\\.,;:\$@"]+)*)|
+            const pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+            return pattern.test(value) || "Invalid e-mail.";
+        }
+    }
+}),
+methods: {
+
+    register() {
+        if (this.valid()) {
+            var bodyFormData = new FormData();
+            bodyFormData.set('firstName', this.firstname);
+            bodyFormData.set('lastName', this.lastname);
+            bodyFormData.set('email', this.email);
+            bodyFormData.set('password', this.password);
+            bodyFormData.set('phoneNo', this.number);
+            bodyFormData.set('confirm_password', this.confirm_password);
+            
+            this.$store.dispatch('REGISTER', 
+                bodyFormData                
+            )
+            .then(({ status }) => {
+                this.$store.commit("SET_NOTIFICATION", {
+                    display: true,
+                    text: 'Your account has been successfully created! you can now login.',
+                    alertClass: "danger"
+                });
+                this.$router.push('/pages/login')
+            })  
+            .catch (error => {
+                console.log(error)
+                alert("Register failed")
+                this.userExist =  true;
+            }) 
+        }  
+    },
+    valid() {
+        return this.password === this.confirm_password;
+    }
 }
+};
 </script>
