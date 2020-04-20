@@ -13,27 +13,8 @@ export default [
         }
       },
       {
-<<<<<<< HEAD
-        _name: 'CSidebarNavTitle'
-=======
         _name: 'CSidebarNavTitle',
         _children: ['Molde']
->>>>>>> 536ce0f18c6e81dadd49a1e30c520bbae0c2ef3b
-      },
-
-      {
-        _name: 'CSidebarNavTitle'
-      },
-      {
-        _name: 'CSidebarNavItem',
-<<<<<<< HEAD
-        name: 'Products',
-        to: '/components/products',
-        icon: 'cil-star'
-=======
-        name: 'Statistic',
-        to: '/charts',
-        icon: 'cil-chart-pie'
       },
       {
         _name: 'CSidebarNavItem',
@@ -60,9 +41,10 @@ export default [
         icon: 'cil-chart-pie'
       },
       {
-        _name: 'CSidebarNavTitle',
-        _children: ['Components']
->>>>>>> 536ce0f18c6e81dadd49a1e30c520bbae0c2ef3b
+        _name: 'CSidebarNavItem',
+        name: 'Products',
+        to: '/components/products',
+        icon: 'cil-star'
       },
       {
         _name: 'CSidebarNavDropdown',
@@ -72,11 +54,11 @@ export default [
         items: [
           {
             name: 'Menunggu Pembayaran',
-            to: '/components/MenungguPembayaran'
+            to: '/components/payment'
           },
           {
             name: 'Dalam Pengiriman',
-            to: '/components/DalamPengiriman'
+            to: '/components/shipment'
           },
           {
             name: 'Selesai',

@@ -60,11 +60,6 @@
       <CIcon name="cil-shield-alt" /> Lock Account
     </CDropdownItem>
     <CDropdownItem>
-      <CHeaderNavLink to="/Login">
-        <CIcon name="cil-lock-locked" /> Login
-      </CHeaderNavLink>
-    </CDropdownItem>
-    <CDropdownItem>
       <CIcon name="cil-lock-locked" /> Logout
     </CDropdownItem>
   </CDropdown>

@@ -34,6 +34,10 @@
             <td style="width:40%">{{product.weight}}</td>
             <td style="width:40%">{{product.prize}}</td>
             <td style="width:40%">{{product.stock}}</td>
+            <td>
+              <button class="btn btn-primary" v-on:click="editRole(role)">Edit</button>
+              <button class="btn btn-danger" v-on:click="deleteRole(role)">Delete</button>
+            </td>
             <td style="width:20%">
               <router-link class="btn btn-warning" :to="'/detail/'+product.id">Update</router-link>
               <button class="btn btn-danger" v-on:click="deleteData(product.id)">Delete</button>
@@ -46,13 +50,14 @@
   </div>
 </template>
 
+
 <!-- script js -->
 <script>
   export default {
     data() {
       return {
         // variable array yang akan menampung hasil fetch dari api
-        persons: []
+        product: []
       };
     },
     created() {
@@ -71,7 +76,7 @@
         axios.delete("http://localhost:8000/api/product/" + id).then(response => {
           this.loadData();
         });
-      }
+      },
     }
   };
 </script>

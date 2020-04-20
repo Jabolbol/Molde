@@ -18,9 +18,11 @@
         <table class="table">
           <thead>
           <tr>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Action</th>
+              <th scope="col">Transaction Number</th>
+              <th scope="col">Total Item </th>
+              <th scope="col">Total Harga</th>
+              <th scope="col">Status</th>
+              <th scope="col">Action</th>
           </tr>
           </thead>
           <tbody>

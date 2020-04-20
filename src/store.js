@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import userStore from './store/userStore'
+import productsStore from "./store/productsStore";
 Vue.use(Vuex)
 
 const state = {
@@ -26,7 +27,8 @@ export default new Vuex.Store({
   modules:{
     state,
     mutations,
-    userStore
+    userStore,
+    productsStore
   }
-  
+
 })

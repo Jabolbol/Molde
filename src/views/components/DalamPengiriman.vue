@@ -7,7 +7,7 @@
         <br>
         <div class="row">
           <div class="col-md-10">
-            <h4>Products</h4>
+            <h4>Orders</h4>
           </div>
           <div class="colmd-2">
             <!-- push router ke form membuat data -->
@@ -18,8 +18,10 @@
         <table class="table">
           <thead>
           <tr>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
+            <th scope="col">Transaction Number</th>
+            <th scope="col">Total Item </th>
+            <th scope="col">Total Harga</th>
+            <th scope="col">Status</th>
             <th scope="col">Action</th>
           </tr>
           </thead>

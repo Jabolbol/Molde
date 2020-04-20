@@ -21,6 +21,7 @@ const Orders = () => import('@/views/components/Orders')
 const Payment = () => import('@/views/components/MenungguPembayaran')
 const Shipment = () => import('@/views/components/DalamPengiriman')
 const Done = () => import('@/views/components/Selesai')
+const RequestToko = () => import('@/views/components/RequestToko')
 
 // Users
 const Users = () => import('@/views/users/Users')
@@ -134,14 +135,43 @@ function configRoutes () {
               component: Shipment
             },
             {
+              path: 'payment',
+              name: 'Payment',
+              component: Payment
+            },
+            {
+              path: 'shipment',
+              name: 'Shipment',
+              component: Shipment
+            },
+            {
               path: 'done',
               name: 'Done',
               component: Done
-            }
+            },
+              {
+                  path: 'request',
+                  name: 'RequestToko',
+                  component: RequestToko
+              }
           ]
         }
       ]
     }
   ]
 }
+
+// Router.beforeEach((to, from, next) => {
+//   const publicPages = ['/Dashboard'];
+//   const authRequired = !publicPages.includes(to.path);
+//   const loggedIn = localStorage.getItem('user');
+//
+//   // trying to access a restricted page + not logged in
+//   // redirect to login page
+//   if (authRequired && !loggedIn) {
+//     next('/Login');
+//   } else {
+//     next();
+//   }
+// });
 
