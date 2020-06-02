@@ -53,7 +53,7 @@ export default {
   methods: {
     getBadge (status) {
       return status === 'Active' ? 'success'
-        : status === 'Inactive' ? 'secondary'
+        : status === 'Inactiv' ? 'secondary'
           : status === 'Pending' ? 'warning'
             : status === 'Banned' ? 'danger' : 'primary'
     }

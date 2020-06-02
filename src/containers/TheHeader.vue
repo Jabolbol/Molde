@@ -31,6 +31,11 @@
       </CHeaderNavItem>
     </CHeaderNav>
     <CHeaderNav class="mr-4">
+      <CHeaderNavItem class="px-3">
+        <CHeaderNavLink to="/components/request">
+          RequestToko
+        </CHeaderNavLink>
+      </CHeaderNavItem>
       <CHeaderNavItem class="d-md-down-none mx-2">
         <CHeaderNavLink>
           <CIcon name="cil-bell"/>

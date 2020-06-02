@@ -6,11 +6,11 @@
           <CCardHeader>
             <strong>Credit Card </strong> <small>Form</small>
             <div class="card-header-actions">
-              <a 
-                href="https://coreui.io/vue/docs/components/form-components" 
-                class="card-header-action" 
-                rel="noreferrer noopener" 
-                target="_blank"
+              <a
+                      href="https://coreui.io/vue/docs/components/form-components"
+                      class="card-header-action"
+                      rel="noreferrer noopener"
+                      target="_blank"
               >
                 <small class="text-muted">docs</small>
               </a>
@@ -20,36 +20,36 @@
             <CRow>
               <CCol sm="12">
                 <CInput
-                  label="Name"
-                  placeholder="Enter your name"
+                        label="Name"
+                        placeholder="Enter your name"
                 />
               </CCol>
             </CRow>
             <CRow>
               <CCol sm="12">
                 <CInput
-                  label="Credit Card Number"
-                  placeholder="0000 0000 0000 0000"
+                        label="Credit Card Number"
+                        placeholder="0000 0000 0000 0000"
                 />
               </CCol>
             </CRow>
             <CRow>
               <CCol sm="4">
                 <CSelect
-                  label="Month"
-                  :options="[1,2,3,4,5,6,7,8,9,10,11,12]"
+                        label="Month"
+                        :options="[1,2,3,4,5,6,7,8,9,10,11,12]"
                 />
               </CCol>
               <CCol sm="4">
                 <CSelect
-                  label="Year"
-                  :options="[2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025]"
+                        label="Year"
+                        :options="[2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025]"
                 />
               </CCol>
               <CCol sm="4">
                 <CInput
-                  label="CVV/CVC"
-                  placeholder="123"
+                        label="CVV/CVC"
+                        placeholder="123"
                 />
               </CCol>
             </CRow>
@@ -63,34 +63,34 @@
           </CCardHeader>
           <CCardBody>
             <CInput
-              label="Company"
-              placeholder="Enter your company name"
+                    label="Company"
+                    placeholder="Enter your company name"
             />
             <CInput
-              label="VAT"
-              placeholder="PL1234567890"
+                    label="VAT"
+                    placeholder="PL1234567890"
             />
             <CInput
-              label="Street"
-              placeholder="Enter street name"
+                    label="Street"
+                    placeholder="Enter street name"
             />
             <CRow>
               <CCol sm="8">
                 <CInput
-                  label="City"
-                  placeholder="Enter your city"
+                        label="City"
+                        placeholder="Enter your city"
                 />
               </CCol>
               <CCol sm="4">
                 <CInput
-                  label="Postal code"
-                  placeholder="Postal code"
+                        label="Postal code"
+                        placeholder="Postal code"
                 />
               </CCol>
             </CRow>
             <CInput
-              label="Country"
-              placeholder="Country name"
+                    label="Country"
+                    placeholder="Country name"
             />
           </CCardBody>
         </CCard>
@@ -105,83 +105,83 @@
           <CCardBody>
             <CForm>
               <CInput
-                description="Let us know your full name."
-                label="Enter your name"
-                horizontal
-                autocomplete="name"
+                      description="Let us know your full name."
+                      label="Enter your name"
+                      horizontal
+                      autocomplete="name"
               />
               <CInput
-                label="Static"
-                value="Username"
-                horizontal
-                plaintext
+                      label="Static"
+                      value="Username"
+                      horizontal
+                      plaintext
               />
               <CInput
-                label="Text input"
-                description="This is a help text"
-                placeholder="Text"
-                horizontal
+                      label="Text input"
+                      description="This is a help text"
+                      placeholder="Text"
+                      horizontal
               />
               <CInput
-                label="Date"
-                type="date"
-                horizontal
+                      label="Date"
+                      type="date"
+                      horizontal
               />
               <CInput
-                label="Email input"
-                description="Please enter your email"
-                placeholder="Enter your email"
-                type="email"
-                horizontal
-                autocomplete="email"
+                      label="Email input"
+                      description="Please enter your email"
+                      placeholder="Enter your email"
+                      type="email"
+                      horizontal
+                      autocomplete="email"
               />
               <CInput
-                label="Password Input"
-                description="Please enter a complex password"
-                placeholder="Enter your password"
-                type="password"
-                horizontal
-                autocomplete="current-password"
+                      label="Password Input"
+                      description="Please enter a complex password"
+                      placeholder="Enter your password"
+                      type="password"
+                      horizontal
+                      autocomplete="current-password"
               />
               <CInput
-                label="Disabled Input"
-                placeholder="Disabled"
-                horizontal
-                disabled
+                      label="Disabled Input"
+                      placeholder="Disabled"
+                      horizontal
+                      disabled
               />
               <CTextarea
-                label="Textarea"
-                placeholder="Content..."
-                horizontal
-                rows="9"
+                      label="Textarea"
+                      placeholder="Content..."
+                      horizontal
+                      rows="9"
               />
               <CSelect
-                label="Select"
-                horizontal
-                :options="options"
-                placeholder="Please select"
+                      label="Select"
+                      horizontal
+                      :options="options"
+                      placeholder="Please select"
               />
               <CSelect
-                label="Large select"
-                size="lg"
-                horizontal
-                :value.sync="selectedOption"
-                :options="selectOptions"
-                placeholder="Please select"
+                      label="Large select"
+                      size="lg"
+                      horizontal
+                      :value.sync="selectedOption"
+                      :options="selectOptions"
+                      placeholder="Please select"
               />
               <CSelect
-                label="Small select"
-                size="sm"
-                horizontal
-                :options="options"
-                placeholder="Please select"
+                      label="Small select"
+                      size="sm"
+                      horizontal
+                      :options="options"
+                      placeholder="Please select"
               />
               <CSelect
-                label="Select"
-                horizontal
-                :options="options"
-                placeholder="Please select"
-                disabled
+                      label="Select"
+                      horizontal
+                      :options="options"
+                      placeholder="Please select"
+                      disabled
               />
               <template v-for="(name, key) in checkboxNames">
                 <CRow form class="form-group" :key="name">
@@ -190,14 +190,14 @@
                   </CCol>
                   <CCol sm="9" :class="key % 2 === 1 ? 'form-inline' : ''">
                     <CInputCheckbox
-                      v-for="(option, optionIndex) in options"
-                      :key="key + option"
-                      :label="option"
-                      :value="option"
-                      :custom="key > 1"
-                      :name="`Option 1${key}`"
-                      :checked="optionIndex === key"
-                      :inline="key % 2 === 1"
+                            v-for="(option, optionIndex) in options"
+                            :key="key + option"
+                            :label="option"
+                            :value="option"
+                            :custom="key > 1"
+                            :name="`Option 1${key}`"
+                            :checked="optionIndex === key"
+                            :inline="key % 2 === 1"
                     />
                   </CCol>
                 </CRow>
@@ -208,33 +208,33 @@
                     {{name}}
                   </CCol>
                   <CInputRadioGroup
-                    class="col-sm-9"
-                    :options="options"
-                    :custom="key > 1"
-                    :checked="`Option ${key}`"
-                    :inline="key % 2 === 1"
+                          class="col-sm-9"
+                          :options="options"
+                          :custom="key > 1"
+                          :checked="`Option ${key}`"
+                          :inline="key % 2 === 1"
                   />
                 </CRow>
               </template>
               <CInputFile
-                label="File input"
-                horizontal
+                      label="File input"
+                      horizontal
               />
               <CInputFile
-                label="Multiple file input"
-                horizontal
-                multiple
+                      label="Multiple file input"
+                      horizontal
+                      multiple
               />
               <CInputFile
-                label="File custom input"
-                horizontal
-                custom
+                      label="File custom input"
+                      horizontal
+                      custom
               />
               <CInputFile
-                label="Multiple file custom input"
-                horizontal
-                multiple
-                custom
+                      label="Multiple file custom input"
+                      horizontal
+                      multiple
+                      custom
               />
             </CForm>
           </CCardBody>
@@ -252,16 +252,16 @@
             <!-- Bootstrap Vue has some problems with Inline forms that's why we use some standard bootstrap classes -->
             <CForm inline>
               <CInput
-                class="mr-2"
-                placeholder="Jane Doe"
+                      class="mr-2"
+                      placeholder="Jane Doe"
               >
                 <template #label>
                   <small>Name:&nbsp;</small>
                 </template>
               </CInput>
               <CInput
-                placeholder="jane.doe@example.com"
-                autocomplete="email"
+                      placeholder="jane.doe@example.com"
+                      autocomplete="email"
               >
                 <template #label>
                   <small>Email:&nbsp;</small>
@@ -283,20 +283,20 @@
           <CCardBody>
             <CForm>
               <CInput
-                type="email"
-                description="Please enter your email."
-                autocomplete="email"
-                label="Email"
-                horizontal
-                placeholder="Enter Email..."
+                      type="email"
+                      description="Please enter your email."
+                      autocomplete="email"
+                      label="Email"
+                      horizontal
+                      placeholder="Enter Email..."
               />
               <CInput
-                type="password"
-                description="Please enter your password."
-                autocomplete="current-password"
-                label="Password"
-                horizontal
-                placeholder="Enter Password..."
+                      type="password"
+                      description="Please enter your password."
+                      autocomplete="current-password"
+                      label="Password"
+                      horizontal
+                      placeholder="Enter Password..."
               />
             </CForm>
           </CCardBody>
@@ -312,22 +312,22 @@
           <CForm novalidate>
             <CCardBody>
               <CInput
-                type="email"
-                description="Please enter your email."
-                autocomplete="email"
-                label="Email"
-                placeholder="Enter Email..."
-                required
-                was-validated
+                      type="email"
+                      description="Please enter your email."
+                      autocomplete="email"
+                      label="Email"
+                      placeholder="Enter Email..."
+                      required
+                      was-validated
               />
               <CInput
-                type="password"
-                description="Please enter your password."
-                autocomplete="current-password"
-                label="Password"
-                placeholder="Enter Password..."
-                required
-                was-validated
+                      type="password"
+                      description="Please enter your password."
+                      autocomplete="current-password"
+                      label="Password"
+                      placeholder="Enter Password..."
+                      required
+                      was-validated
               />
             </CCardBody>
             <CCardFooter>
@@ -403,21 +403,21 @@
           </CCardHeader>
           <CCardBody>
             <CInput
-              label="Small input"
-              size="sm"
-              horizontal
-              placeholder="size='sm'"
+                    label="Small input"
+                    size="sm"
+                    horizontal
+                    placeholder="size='sm'"
             />
             <CInput
-              label="Default input"
-              horizontal
-              placeholder="normal"
+                    label="Default input"
+                    horizontal
+                    placeholder="normal"
             />
             <CInput
-              label="Large input"
-              size="lg"
-              horizontal
-              placeholder="size='lg'"
+                    label="Large input"
+                    size="lg"
+                    horizontal
+                    placeholder="size='lg'"
             />
           </CCardBody>
           <CCardFooter>
@@ -437,14 +437,14 @@
           <CCardBody>
             <CForm validated novalidate>
               <CInput
-                label="Input is valid"
-                valid-feedback="Input is not required."
+                      label="Input is valid"
+                      valid-feedback="Input is not required."
               />
               <CInput
-                label="Input is invalid"
-                required
-                valid-feedback="Thank you :)"
-                invalid-feedback="Please provide a required input."
+                      label="Input is invalid"
+                      required
+                      valid-feedback="Thank you :)"
+                      invalid-feedback="Please provide a required input."
               />
             </CForm>
           </CCardBody>
@@ -458,17 +458,17 @@
           <CCardBody>
             <CForm>
               <CInput
-                label="Input is valid"
-                valid-feedback="Input is valid."
-                invalid-feedback="Please provide at least 4 characters."
-                value="Valid value"
-                :is-valid="validator"
+                      label="Input is valid"
+                      valid-feedback="Input is valid."
+                      invalid-feedback="Please provide at least 4 characters."
+                      value="Valid value"
+                      :is-valid="validator"
               />
               <CInput
-                label="Input is invalid"
-                valid-feedback="Thank you :)"
-                invalid-feedback="Please provide at least 4 characters."
-                :is-valid="validator"
+                      label="Input is invalid"
+                      valid-feedback="Thank you :)"
+                      invalid-feedback="Please provide at least 4 characters."
+                      :is-valid="validator"
               />
             </CForm>
           </CCardBody>
@@ -486,15 +486,15 @@
               <template #prepend-content><CIcon name="cil-user"/></template>
             </CInput>
             <CInput
-              type="email"
-              placeholder="Email"
-              autocomplete="email"
+                    type="email"
+                    placeholder="Email"
+                    autocomplete="email"
             >
               <template #append-content><CIcon name="cil-envelope-open"/></template>
             </CInput>
             <CInput
-              placeholder="ex. $1.000.000"
-              append=".00"
+                    placeholder="ex. $1.000.000"
+                    append=".00"
             >
               <template #prepend-content><CIcon name="cil-euro"/></template>
             </CInput>
@@ -519,18 +519,18 @@
               </template>
             </CInput>
             <CInput
-              type="email"
-              placeholder="Email"
-              autocomplete="email"
+                    type="email"
+                    placeholder="Email"
+                    autocomplete="email"
             >
               <template #append>
                 <CButton type="submit" color="primary">Submit</CButton>
               </template>
             </CInput>
             <CInput
-              type="email"
-              placeholder="Email"
-              autocomplete="email"
+                    type="email"
+                    placeholder="Email"
+                    autocomplete="email"
             >
               <template #prepend>
                 <CButton color="primary"><CIcon name="cib-facebook" height="14"/></CButton>
@@ -555,8 +555,8 @@
             <CInput placeholder="Username">
               <template #prepend>
                 <CDropdown
-                  togglerText="Action"
-                  color="primary"
+                        togglerText="Action"
+                        color="primary"
                 >
                   <CDropdownItem>Action</CDropdownItem>
                   <CDropdownItem>Another action</CDropdownItem>
@@ -566,15 +566,15 @@
               </template>
             </CInput>
             <CInput
-              type="email"
-              placeholder="Email"
-              autocomplete="email"
+                    type="email"
+                    placeholder="Email"
+                    autocomplete="email"
             >
               <template #append>
                 <CDropdown
-                  togglerText="Action"
-                  color="primary"
-                  right
+                        togglerText="Action"
+                        color="primary"
+                        right
                 >
                   <CDropdownItem>Action</CDropdownItem>
                   <CDropdownItem>Another action</CDropdownItem>
@@ -587,9 +587,9 @@
 
               <template #prepend>
                 <CDropdown
-                  togglerText="Split"
-                  color="primary"
-                  split
+                        togglerText="Split"
+                        color="primary"
+                        split
                 >
                   <CDropdownItem href="#">Action</CDropdownItem>
                   <CDropdownItem href="#">Another action</CDropdownItem>
@@ -600,9 +600,9 @@
 
               <template #append>
                 <CDropdown
-                  togglerText="Action"
-                  color="primary"
-                  right
+                        togglerText="Action"
+                        color="primary"
+                        right
                 >
                   <CDropdownItem>Action</CDropdownItem>
                   <CDropdownItem>Another action</CDropdownItem>
@@ -628,9 +628,9 @@
           </CCardHeader>
           <CCardBody>
             <CRow
-              class="form-group"
-              v-for="(number, key) in [4,5,6,7,8]"
-              :key="key"
+                    class="form-group"
+                    v-for="(number, key) in [4,5,6,7,8]"
+                    :key="key"
             >
               <CCol :col="12 - number">
                 <CInput class="mb-0" :placeholder="`.col-md-${12 - number}`"/>
@@ -656,9 +656,9 @@
           </CCardHeader>
           <CCardBody>
             <CRow
-              class="form-group"
-              v-for="(number, key) in [4,5,6,7,8]"
-              :key="key"
+                    class="form-group"
+                    v-for="(number, key) in [4,5,6,7,8]"
+                    :key="key"
             >
               <CCol :col="number">
                 <CInput class="mb-0" :placeholder="`.col-${number}`"/>
@@ -690,16 +690,16 @@
                 <template #append-content><CIcon name="cil-user"/></template>
               </CInput>
               <CInput
-                type="email"
-                autocomplete="email"
-                prepend="Email"
+                      type="email"
+                      autocomplete="email"
+                      prepend="Email"
               >
                 <template #append-content><CIcon name="cil-envelope-closed"/></template>
               </CInput>
               <CInput
-                type="password"
-                autocomplete="current-password"
-                prepend="Password"
+                      type="password"
+                      autocomplete="current-password"
+                      prepend="Password"
               >
                 <template #append-content><CIcon name="cil-shield-alt"/></template>
               </CInput>
@@ -723,16 +723,16 @@
                 <template #append-content><CIcon name="cil-user"/></template>
               </CInput>
               <CInput
-                placeholder="Email"
-                type="email"
-                autocomplete="email"
+                      placeholder="Email"
+                      type="email"
+                      autocomplete="email"
               >
                 <template #append-content><CIcon name="cil-envelope-closed"/></template>
               </CInput>
               <CInput
-                placeholder="Password"
-                type="password"
-                autocomplete="current-password"
+                      placeholder="Password"
+                      type="password"
+                      autocomplete="current-password"
               >
                 <template #append-content><CIcon name="cil-shield-alt"/></template>
               </CInput>
@@ -756,16 +756,16 @@
                 <template #prepend-content><CIcon name="cil-user"/></template>
               </CInput>
               <CInput
-                placeholder="Email"
-                type="email"
-                autocomplete="email"
+                      placeholder="Email"
+                      type="email"
+                      autocomplete="email"
               >
                 <template #prepend-content><CIcon name="cil-envelope-closed"/></template>
               </CInput>
               <CInput
-                placeholder="Password"
-                type="password"
-                autocomplete="current-password"
+                      placeholder="Password"
+                      type="password"
+                      autocomplete="current-password"
               >
                 <template #prepend-content><CIcon name="cil-shield-alt"/></template>
               </CInput>
@@ -790,8 +790,8 @@
                   <CIcon name="cil-settings"/>
                 </CLink>
                 <CLink
-                  class="card-header-action btn-minimize"
-                  @click="formCollapsed=!formCollapsed"
+                        class="card-header-action btn-minimize"
+                        @click="formCollapsed=!formCollapsed"
                 >
                   <CIcon :name="`cil-chevron-${formCollapsed ? 'bottom' : 'top'}`"/>
                 </CLink>
@@ -803,26 +803,26 @@
             <CCollapse :show="formCollapsed">
               <CCardBody>
                 <CInput
-                  label="Prepended text"
-                  description="Here's some help text"
-                  type="email"
-                  autocomplete="email"
-                  prepend="@"
+                        label="Prepended text"
+                        description="Here's some help text"
+                        type="email"
+                        autocomplete="email"
+                        prepend="@"
                 />
                 <CInput
-                  label="Appended text"
-                  append=".00"
-                  description="Here's some help text"
+                        label="Appended text"
+                        append=".00"
+                        description="Here's some help text"
                 />
                 <CInput
-                  label="Appended and prepended text"
-                  append=".00"
-                  description="Here's some help text"
-                  prepend="$"
+                        label="Appended and prepended text"
+                        append=".00"
+                        description="Here's some help text"
+                        prepend="$"
                 />
                 <CInput
-                  label="Append with button"
-                  description="Here's some help text"
+                        label="Append with button"
+                        description="Here's some help text"
                 >
                   <template #append>
                     <CButton color="primary">Go!</CButton>
@@ -848,34 +848,33 @@
 </template>
 
 <script>
-export default {
-  name: 'Forms',
-  data () {
-    return {
-      selected: [], // Must be an array reference!
-      show: true,
-      horizontal: { label:'col-3', input:'col-9' },
-      options: ['Option 1', 'Option 2', 'Option 3'],
-      selectOptions: [
-        'Option 1', 'Option 2', 'Option 3',
-        { 
-          value: ['some value', 'another value'], 
-          label: 'Selected option'
-        }
-      ],
-      selectedOption: ['some value', 'another value'],
-
-      formCollapsed: true,
-      checkboxNames: ['Checkboxes', 'Inline Checkboxes',
-                      'Checkboxes - custom', 'Inline Checkboxes - custom'],
-      radioNames: ['Radios', 'Inline Radios',
-                    'Radios - custom', 'Inline Radios - custom']
-    }
-  },
-  methods: {
-    validator (val) {
-      return val ? val.length >= 4 : false
+  export default {
+    name: 'Forms',
+    data () {
+      return {
+        selected: [], // Must be an array reference!
+        show: true,
+        horizontal: { label:'col-3', input:'col-9' },
+        options: ['Option 1', 'Option 2', 'Option 3'],
+        selectOptions: [
+          'Option 1', 'Option 2', 'Option 3',
+          {
+            value: ['some value', 'another value'],
+            label: 'Selected option'
+          }
+        ],
+        selectedOption: ['some value', 'another value'],
+        formCollapsed: true,
+        checkboxNames: ['Checkboxes', 'Inline Checkboxes',
+          'Checkboxes - custom', 'Inline Checkboxes - custom'],
+        radioNames: ['Radios', 'Inline Radios',
+          'Radios - custom', 'Inline Radios - custom']
+      }
+    },
+    methods: {
+      validator (val) {
+        return val ? val.length >= 4 : false
+      }
     }
   }
-}
 </script>

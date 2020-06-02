@@ -1,41 +1,30 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-
 // Containers
 const TheContainer = () => import('@/containers/TheContainer')
 
 // Views
 const Dashboard = () => import('@/views/Dashboard')
 
-const Colors = () => import('@/views/theme/Colors')
-const Typography = () => import('@/views/components/Typography')
-const Create = () => import('@/views/components/Create')
-
 const Charts = () => import('@/views/charts/Charts')
 const Widgets = () => import('@/views/widgets/Widgets')
 
 // Views - Components
-const Cards = () => import('@/views/components/Cards')
-const Forms = () => import('@/views/components/Forms')
-const Switches = () => import('@/views/components/Switches')
-const Tables = () => import('@/views/components/Tables')
-const Tabs = () => import('@/views/components/Tabs')
 const Breadcrumbs = () => import('@/views/components/Breadcrumbs')
-const Carousels = () => import('@/views/components/Carousels')
-const Collapses = () => import('@/views/components/Collapses')
-const Jumbotrons = () => import('@/views/components/Jumbotrons')
-const ListGroups = () => import('@/views/components/ListGroups')
-const Navs = () => import('@/views/components/Navs')
-const Navbars = () => import('@/views/components/Navbars')
-const Paginations = () => import('@/views/components/Paginations')
-const Popovers = () => import('@/views/components/Popovers')
-const ProgressBars = () => import('@/views/components/ProgressBars')
-const Tooltips = () => import('@/views/components/Tooltips')
+const Tables = () => import('@/views/components/Tables')
+const Tabs = () => import('@/views/components/Table')
+const Products = () => import('@/views/components/Products')
+const Create = () => import('@/views/components/Create')
+const Orders = () => import('@/views/components/Orders')
+const Payment = () => import('@/views/components/MenungguPembayaran')
+const Shipment = () => import('@/views/components/ContohForm')
+const DetailOrder = () => import('@/views/components/DetailOrder')
+const RequestToko = () => import('@/views/components/RequestToko')
+const ProductsList = () => import('@/views/components/ProductsList')
+const ProductsUpdate = () => import('@/views/components/ProductsUpdate')
 
-// Views - Pages
-const Page404 = () => import('@/views/pages/Page404')
-const Page500 = () => import('@/views/pages/Page500')
+// Pages
 const Login = () => import('@/views/pages/Login')
 const Register = () => import('@/views/pages/Register')
 
@@ -52,6 +41,7 @@ export default new Router({
   routes: configRoutes()
 })
 
+
 function configRoutes () {
   return [
     {
@@ -64,31 +54,6 @@ function configRoutes () {
           path: 'dashboard',
           name: 'Dashboard',
           component: Dashboard
-        },
-        {
-          path: 'theme',
-          redirect: '/theme/colors',
-          name: 'Theme',
-          component: {
-            render (c) { return c('router-view') }
-          },
-          children: [
-            {
-              path: 'colors',
-              name: 'Colors',
-              component: Colors
-            },
-            {
-              path: 'typography',
-              name: 'Typography',
-              component: Typography
-            },
-            {
-              path: 'create',
-              name: 'Create',
-              component: Create
-            }
-          ]
         },
         {
           path: 'charts',
@@ -127,28 +92,13 @@ function configRoutes () {
           ]
         },
         {
-          path: 'base',
+          path: 'components',
           redirect: '/components/cards',
-          name: 'Base',
+          name: 'Components',
           component: {
             render (c) { return c('router-view') }
           },
           children: [
-            {
-              path: 'cards',
-              name: 'Cards',
-              component: Cards
-            },
-            {
-              path: 'forms',
-              name: 'Forms',
-              component: Forms
-            },
-            {
-              path: 'switches',
-              name: 'Switches',
-              component: Switches
-            },
             {
               path: 'tables',
               name: 'Tables',
@@ -165,87 +115,73 @@ function configRoutes () {
               component: Breadcrumbs
             },
             {
-              path: 'carousels',
-              name: 'Carousels',
-              component: Carousels
+              path: 'products',
+              name: 'products',
+              component: Products
             },
             {
-              path: 'collapses',
-              name: 'Collapses',
-              component: Collapses
+              path: 'create',
+              name: 'Create',
+              component: Create
             },
             {
-              path: 'jumbotrons',
-              name: 'Jumbotrons',
-              component: Jumbotrons
+              path: 'orders',
+              name: 'Orders',
+              component: Orders
             },
             {
-              path: 'list-groups',
-              name: 'List Groups',
-              component: ListGroups
+              path: 'payment',
+              name: 'Payment',
+              component: Payment
             },
             {
-              path: 'navs',
-              name: 'Navs',
-              component: Navs
+              path: 'shipment',
+              name: 'Shipment',
+              component: Shipment
             },
             {
-              path: 'navbars',
-              name: 'Navbars',
-              component: Navbars
+              path: 'detailOrder',
+              name: 'DetailOrder',
+              component: DetailOrder
             },
             {
-              path: 'paginations',
-              name: 'Paginations',
-              component: Paginations
+                path: 'request',
+                name: 'RequestToko',
+                component: RequestToko
             },
             {
-              path: 'popovers',
-              name: 'Popovers',
-              component: Popovers
+              path: 'productsList',
+              name: 'ProductsList',
+              component: ProductsList
             },
             {
-              path: 'progress-bars',
-              name: 'Progress Bars',
-              component: ProgressBars
-            },
-            {
-              path: 'tooltips',
-              name: 'Tooltips',
-              component: Tooltips
+              path: 'productsUpdate',
+              name: 'ProductsUpdate',
+              component: ProductsUpdate
             }
           ]
-        }
-      ]
-    },
-    {
-      path: '/pages',
-      redirect: '/pages/404',
-      name: 'Pages',
-      component: {
-        render (c) { return c('router-view') }
-      },
-      children: [
-        {
-          path: '404',
-          name: 'Page404',
-          component: Page404
         },
         {
-          path: '500',
-          name: 'Page500',
-          component: Page500
+          path: 'pages',
+          name : 'Pages',
+          component: {
+            render(c) {
+              return c('router-view')
+            }
+          },
+          children: [
+            {
+              path: 'login',
+              name: 'Login',
+              component: Login
+            },
+            {
+              path: 'register',
+              name: 'Register',
+              component: Register
+            }
+          ]
         },
-        {
-          path: 'login',
-          name: 'Login',
-          component: Login
-        },
-        {
-          path: 'register',
-          name: 'Register',
-          component: Register
-        }
       ]
     }
   ]

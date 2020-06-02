@@ -7,13 +7,12 @@
                 <h4>Create new data</h4>
                 <br>
                 <!-- prevent form submit untuk reload halaman, kemudian memanggil function addData() -->
-                <form @submit.prevent="addData">
+                <form @submit.prevent="updateArticle(id)">
                     <div class="form-group">
                         <label>Nama Barang</label>
                         <input
                                 type="textfield"
                                 class="form-control"
-                                placeholder="Masukkan nama barang"
                                 v-model="name"
                                 required
                         >
@@ -23,7 +22,6 @@
                         <input
                                 type="textfield"
                                 class="form-control"
-                                placeholder="Masukkan Deskripsi"
                                 v-model="description"
                                 required
                         >
@@ -33,7 +31,6 @@
                         <input
                                 type="textfield"
                                 class="form-control"
-                                placeholder="Masukkan Deskripsi"
                                 v-model="weight"
                                 required
                         >
@@ -43,7 +40,6 @@
                         <input
                                 type="textfield"
                                 class="form-control"
-                                placeholder="Masukkan Deskripsi"
                                 v-model="price"
                                 required
                         >
@@ -53,7 +49,6 @@
                         <input
                                 type="textfield"
                                 class="form-control"
-                                placeholder="Masukkan Deskripsi"
                                 v-model="stock"
                                 required
                         >
@@ -62,54 +57,74 @@
                         <input type="file" accept="image/*" id="image" @change="uploadImage">
                     </div>
                     <div>
-                    <button class="btn btn-primary">Submit</button>
+                        <button class="btn btn-primary">Submit</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </template>
-
 <script>
-    import axios from 'axios'
     export default {
         data() {
             return {
+                id: '',
                 name: '',
                 description: '',
                 weight: '',
                 price: '',
-                stock: '',
-                image: null
+                stock: ''
             }
         },
+        mounted() {
+            this.id = this.$route.params.id // id of the article
+            this.fetchArticle(this.id)
+        },
         methods: {
-            uploadImage(event){
-                console.log(event)
-                this.image = event.target.files[0]
-            },
-
-            addData() {
-                // post data ke api menggunakan axios
-                const formData = new FormData();
-                formData.set('name', this.name);
-                formData.set('description', this.description);
-                formData.set('weight', this.weight);
-                formData.set('price', this.price);
-                formData.set('stock', this.stock);
-                formData.append('image', this.image, this.image.name);
-
-                axios({
-                    method: 'post',
-                    url: 'http://localhost:9000/molde/api/v1/product/add',
-                    data: formData,
+            /**
+             * used to fetch the article to updated
+             * @return {[type]} [description]
+             */
+            fetchArticle(id) {
+                const URL = 'http://localhost:9000/molde/api/v1/product/'+id+'/detail'
+                this.$axios({
+                    method: 'get',
+                    url: URL,
                 })
-                    .then(response => {
-                        // push rou ter ke read data
-                        this.$router.push("/components/products");
-                    });
+                    .then(res => {
+                        // eslint-disable-next-line
+                        const { name, description } = res.data.data
+                        // eslint-disable-next-line
+                        this.article_title = name
+                        // eslint-disable-next-line
+                        this.article_description = description
+                    })
+                    .catch(err => {
+                        // eslint-disable-next-line
+                        console.log(err)
+                    })
+            },
+            /**
+             * [updateArticle used to Update Article]
+             */
+            updateArticle(id) {
+                // eslint-disable-next-line
+                const { name, description } = this
+                const data = { name, description }
+                const URL = 'http://localhost:9000/molde/api/v1/product/'+id+'/update'
+                this.$axios({
+                    method: 'put',
+                    url: URL,
+                    data: data
+                })
+                    .then(_ => {
+                        this.$router.push('/app')
+                    })
+                    .catch(err => {
+                        // eslint-disable-next-line
+                        console.log(err)
+                    })
             }
         }
-    };
-
+    }
 </script>

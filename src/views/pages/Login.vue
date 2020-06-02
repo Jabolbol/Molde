@@ -27,12 +27,12 @@
                   <CCol col="6" class="text-left">
                     <CButton type="submit" color="primary" class="px-4" @click.prevent="login()">Login</CButton>
                   </CCol>
-                  
+
                   <CCol col="6" class="text-right">
                     <router-link to='./register' class="btn btn-link">Register</router-link>
                   </CCol>
                 </CRow>
-              
+
 
               </Form>
             </CCardBody>
@@ -44,27 +44,27 @@
 export default {
   name: 'login',
   data: () => ({
-      email: '',
-      password: '',
-      error: false
-    
-  }), 
+    email: '',
+    password: '',
+    error: false
+
+  }),
   methods: {
     login() {
       console.log(this.$store);
-      
-      this.$store.dispatch("LOGIN", {
-        email: this.email,
-        password: this.password
-      })
-      .then(success => {
-        this.$router.push("/")
-      })
-      .catch(error => {
-        alert("Login failed")
-        this.error  = true;
-      })
+      let email = this.email
+      let password = this.password
+      this.$store.dispatch("LOGIN", {email, password})
+        .then(() => this.$router.push("/"))
+        .catch(err => console.log(err))
+                .then(success => {
+          this.$router.push("/")
+        })
+        .catch(error => {
+          alert("Login failed")
+          this.error  = true;
+        })
     }
   }
-};
+}
 </script>

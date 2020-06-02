@@ -69,10 +69,19 @@
 export default {
   name: 'TheHeaderDropdownAccnt',
   data () {
-    return { 
+    return {
       itemsCount: 42
     }
-  }
+  },
+
+  methods: {
+    logout: function () {
+      this.$store.dispatch('logout')
+              .then(() => {
+                this.$router.push('/login')
+              })
+    }
+  },
 }
 </script>
 

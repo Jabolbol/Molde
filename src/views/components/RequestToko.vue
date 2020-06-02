@@ -9,57 +9,74 @@
                 <!-- prevent form submit untuk reload halaman, kemudian memanggil function addData() -->
                 <form @submit.prevent="addData">
                     <div class="form-group">
-                        <label>Nama Barang</label>
+                        <label>Shop Name</label>
                         <input
                                 type="textfield"
                                 class="form-control"
-                                placeholder="Masukkan nama barang"
-                                v-model="name"
+                                placeholder="Masukkan Nama Toko"
+                                v-model="shopName"
                                 required
                         >
                     </div>
                     <div class="form-group">
-                        <label>Deskripsi</label>
+                        <label>App Name</label>
                         <input
                                 type="textfield"
                                 class="form-control"
-                                placeholder="Masukkan Deskripsi"
-                                v-model="description"
+                                placeholder="Masu kkan Nama Aplikasi"
+                                v-model="appName"
                                 required
                         >
                     </div>
                     <div class="form-group">
-                        <label>Berat</label>
-                        <input
-                                type="textfield"
-                                class="form-control"
-                                placeholder="Masukkan Deskripsi"
-                                v-model="weight"
-                                required
-                        >
-                    </div>
-                    <div class="form-group">
-                        <label>Harga</label>
+                        <label>Logo</label>
                         <input
                                 type="textfield"
                                 class="form-control"
                                 placeholder="Masukkan Deskripsi"
-                                v-model="price"
+                                v-model="appLogo"
                                 required
                         >
                     </div>
                     <div class="form-group">
-                        <label>Stock</label>
+                        <label>Background</label>
                         <input
                                 type="textfield"
                                 class="form-control"
                                 placeholder="Masukkan Deskripsi"
-                                v-model="stock"
+                                v-model="appBackground"
                                 required
                         >
                     </div>
                     <div class="form-group">
-                        <input type="file" accept="image/*" id="image" @change="uploadImage">
+                        <label>Font Color</label>
+                        <input
+                                type="textfield"
+                                class="form-control"
+                                placeholder="Masukkan Deskripsi"
+                                v-model="appFontColor"
+                                required
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label>Layout</label>
+                        <input
+                                type="textfield"
+                                class="form-control"
+                                placeholder="Masukkan Deskripsi"
+                                v-model="prodLayout"
+                                required
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <input
+                                type="textfield"
+                                class="form-control"
+                                placeholder="Masukkan Deskripsi"
+                                v-model="category"
+                                required
+                        >
                     </div>
                     <div>
                     <button class="btn btn-primary">Submit</button>
@@ -75,39 +92,37 @@
     export default {
         data() {
             return {
-                name: '',
-                description: '',
-                weight: '',
-                price: '',
-                stock: '',
-                image: null
+                shopName: '',
+                appName: '',
+                appLogo: '',
+                appBackground: '',
+                appFontColor: '',
+                prodLayout: '',
+                category: ''
             }
         },
         methods: {
-            uploadImage(event){
-                console.log(event)
-                this.image = event.target.files[0]
-            },
-
             addData() {
                 // post data ke api menggunakan axios
                 const formData = new FormData();
-                formData.set('name', this.name);
-                formData.set('description', this.description);
-                formData.set('weight', this.weight);
-                formData.set('price', this.price);
-                formData.set('stock', this.stock);
-                formData.append('image', this.image, this.image.name);
+                formData.set('shopName', this.shopName);
+                formData.set('appName', this.appName);
+                formData.set('appLogo', this.appLogo);
+                formData.set('appBackground', this.appBackground);
+                formData.set('appFontColor', this.appFontColor);
+                formData.set('prodLayout', this.prodLayout);
+                formData.set('category', this.category);
 
                 axios({
                     method: 'post',
-                    url: 'http://localhost:9000/molde/api/v1/product/add',
+                    url: 'http://localhost:9000/molde/api/v1/request/create',
                     data: formData,
                 })
-                    .then(response => {
-                        // push rou ter ke read data
-                        this.$router.push("/components/products");
-                    });
+                .then(response => {
+                    console.log(response)
+                    // push router ke read data
+                    this.$router.push("/");
+                });
             }
         }
     };

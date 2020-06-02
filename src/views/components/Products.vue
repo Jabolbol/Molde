@@ -18,19 +18,25 @@
         <table class="table">
           <thead>
           <tr>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
+            <th scope="col">Nama Barang</th>
+            <th scope="col">Deskripsi</th>
+            <th scope="col">Berat</th>
+            <th scope="col">Harga</th>
+            <th scope="col">Stock</th>
             <th scope="col">Action</th>
           </tr>
           </thead>
           <tbody>
           <!-- menampilkan data ke table -->
-          <tr v-for="person in persons" :key="person.id">
-            <td style="width:40%">{{person.first_name}}</td>
-            <td style="width:40%">{{person.last_name}}</td>
-            <td style="width:20%">
-              <router-link class="btn btn-warning" :to="'/detail/'+person.id">Update</router-link>
-              <button class="btn btn-danger" v-on:click="deleteData(person.id)">Delete</button>
+          <tr v-for="product in products" :key="product.id">
+            <td>{{product.name}}</td>
+            <td>{{product.description}}</td>
+            <td>{{product.weight}}</td>
+            <td>{{product.price}}</td>
+            <td>{{product.stock}}</td>
+            <td style=" width:20%">
+              <router-link class="btn btn-warning" :to="'/detail/'+product.id">Update</router-link>
+              <button class="btn btn-danger" v-on:click="deleteData(product.id)">Delete</button>
             </td>
           </tr>
           </tbody>
@@ -40,13 +46,15 @@
   </div>
 </template>
 
+
 <!-- script js -->
 <script>
-  export default {
+    import axios from 'axios'
+    export default {
     data() {
       return {
         // variable array yang akan menampung hasil fetch dari api
-        persons: []
+        products: []
       };
     },
     created() {
@@ -55,17 +63,18 @@
     methods: {
       loadData() {
         // fetch data dari api menggunakan axios
-        axios.get("http://localhost:8000/api/person").then(response => {
+        axios.get("http://localhost:9000/molde/api/v1/product/all").then(response => {
+            console.log(response.data.data)
           // mengirim data hasil fetch ke varibale array persons
-          this.persons = response.data;
+          this.products = response.data.data;
         });
       },
       deleteData(id) {
         // delete data
-        axios.delete("http://localhost:8000/api/person/" + id).then(response => {
+        axios.delete("http://localhost:9000/molde/api/v1/product/" + id + "/delete").then(response => {
           this.loadData();
         });
-      }
+      },
     }
   };
 </script>

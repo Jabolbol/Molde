@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import userStore from './store/userStore'
-import ui from './store/ui'
+// import ui from './store/ui'
+
 Vue.use(Vuex)
 
 const state = {
@@ -10,14 +11,6 @@ const state = {
 }
 
 const mutations = {
-  toggleSidebarDesktop (state) {
-    const sidebarOpened = [true, 'responsive'].includes(state.sidebarShow)
-    state.sidebarShow = sidebarOpened ? false : 'responsive'
-  },
-  toggleSidebarMobile (state) {
-    const sidebarClosed = [false, 'responsive'].includes(state.sidebarShow)
-    state.sidebarShow = sidebarClosed ? true : 'responsive'
-  },
   set (state, [variable, value]) {
     state[variable] = value
   }
@@ -25,10 +18,10 @@ const mutations = {
 
 export default new Vuex.Store({
   modules:{
-    state,
-    mutations,
+    // state,
+    // mutations,
     userStore,
-    ui
+    // ui
   }
-  
+
 })

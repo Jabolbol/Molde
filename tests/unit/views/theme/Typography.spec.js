@@ -5,7 +5,7 @@ import Typography from '@/views/theme/Typography'
 
 Vue.use(CoreuiVue)
 
-describe('Typography.vue', () => {
+describe('Products.vue', () => {
   it('has a name', () => {
     expect(Typography.name).toBe('Typography')
   })
