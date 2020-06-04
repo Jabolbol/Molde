@@ -42,27 +42,33 @@
       </div>
     </div>
 
-    <div id="modal-template" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Shopping cart</h5>
-            <button class="close" data-dismiss="modal">
-              &times;
-            </button>
-          </div>
-          <div class="modal-body">
-            Shopping cart items will go here.
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" data-dismiss="modal">Keep shopping</button>
-            <button class="btn btn-primary">Check out</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+      <transition name="modal-fade">
+          <div class="modal-backdrop">
+              <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
+                  <header class="modal-header" id="modalTitle">
+                      <slot name="header">
+                          This is the default title!
+                          <button type="button" class="btn-close" @click="close" aria-label="Close modal">x</button>
+                      </slot>
+                  </header>
 
+                  <section class="modal-body" id="modalDescription">
+                      <slot name="body">
+                          I'm the default body!
+                      </slot>
+                  </section>
+
+                  <footer class="modal-footer">
+                      <slot name="footer">
+                          I'm the default footer!
+                          <button type="button" class="btn-green" @click="close" aria-label="Close modal">Close me!
+                          </button>
+                      </slot>
+                  </footer>
+              </div>
+          </div>
+      </transition>
+  </div>
 </template>
 
 <!-- script js -->
@@ -79,6 +85,9 @@
       this.loadData();
     },
     methods: {
+        close() {
+            this.$emit('close');
+        },
       loadData() {
         // fetch data dari api menggunakan axios
         axios.get("http://localhost:9000/molde/api/v1/order/shop/get").then(response => {

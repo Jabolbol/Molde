@@ -95,9 +95,9 @@
                         // eslint-disable-next-line
                         const { name, description } = res.data.data
                         // eslint-disable-next-line
-                        this.article_title = name
+                        this.name = name
                         // eslint-disable-next-line
-                        this.article_description = description
+                        this.description = description
                     })
                     .catch(err => {
                         // eslint-disable-next-line
