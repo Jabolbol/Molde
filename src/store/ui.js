@@ -1,4 +1,3 @@
-
 export default {
     state: {
         notification: {
@@ -23,7 +22,5 @@ export default {
         }
 
     },
-    action: {
-
-    }
+    action: {}
 };

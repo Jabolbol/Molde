@@ -79,7 +79,7 @@
                         >
                     </div>
                     <div>
-                    <button class="btn btn-primary">Submit</button>
+                        <button class="btn btn-primary">Submit</button>
                     </div>
                 </form>
             </div>
@@ -89,6 +89,7 @@
 
 <script>
     import axios from 'axios'
+
     export default {
         data() {
             return {
@@ -118,11 +119,11 @@
                     url: 'http://localhost:9000/molde/api/v1/request/create',
                     data: formData,
                 })
-                .then(response => {
-                    console.log(response)
-                    // push router ke read data
-                    this.$router.push("/");
-                });
+                    .then(response => {
+                        console.log(response)
+                        // push router ke read data
+                        this.$router.push("/");
+                    });
             }
         }
     };

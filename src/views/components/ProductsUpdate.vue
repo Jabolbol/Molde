@@ -86,14 +86,14 @@
              * @return {[type]} [description]
              */
             fetchArticle(id) {
-                const URL = 'http://localhost:9000/molde/api/v1/product/'+id+'/detail'
+                const URL = 'http://localhost:9000/molde/api/v1/product/' + id + '/detail'
                 this.$axios({
                     method: 'get',
                     url: URL,
                 })
                     .then(res => {
                         // eslint-disable-next-line
-                        const { name, description } = res.data.data
+                        const {name, description} = res.data.data
                         // eslint-disable-next-line
                         this.article_title = name
                         // eslint-disable-next-line
@@ -109,9 +109,9 @@
              */
             updateArticle(id) {
                 // eslint-disable-next-line
-                const { name, description } = this
-                const data = { name, description }
-                const URL = 'http://localhost:9000/molde/api/v1/product/'+id+'/update'
+                const {name, description} = this
+                const data = {name, description}
+                const URL = 'http://localhost:9000/molde/api/v1/product/' + id + '/update'
                 this.$axios({
                     method: 'put',
                     url: URL,
