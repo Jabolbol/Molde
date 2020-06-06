@@ -53,6 +53,12 @@ export default [
         icon: 'cil-star'
       },
       {
+        _name: 'CSidebarNavItem',
+        name: 'Bank',
+        to: '/components/listBank',
+        icon: 'cil-star'
+      },
+      {
         _name: 'CSidebarNavDivider',
         _class: 'm-2'
       }

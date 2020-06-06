@@ -23,6 +23,8 @@ const DetailOrder = () => import('@/views/components/DetailOrder')
 const RequestToko = () => import('@/views/components/RequestToko')
 const ProductsList = () => import('@/views/components/ProductsList')
 const ProductsUpdate = () => import('@/views/components/ProductsUpdate')
+const Bank = () => import('@/views/components/Bank')
+const ListBank = () => import('@/views/components/ListBank')
 
 // Pages
 const Login = () => import('@/views/pages/Login')
@@ -158,6 +160,16 @@ function configRoutes () {
               path: 'productsUpdate',
               name: 'ProductsUpdate',
               component: ProductsUpdate
+            },
+            {
+              path: 'bank',
+              name: 'Bank',
+              component: Bank
+            },
+            {
+              path: 'listBank',
+              name: 'ListBank',
+              component: ListBank
             }
           ]
         },
