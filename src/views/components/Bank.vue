@@ -14,6 +14,7 @@
                                 class="form-control"
                                 placeholder="Masukkan Nama Bank"
                                 v-model="bank_name"
+                                required
                         >
                     </div>
 
@@ -41,7 +42,7 @@
                     // localhost:9000/molde/api/v1/bank/add?name=BNI
                 })
                     .then(response => {
-                        this.$router.push("/listBank");
+                        this.$router.push('/components/listBank');
                         console.log(response);
                         console.log(this.bank_name);
                     });
