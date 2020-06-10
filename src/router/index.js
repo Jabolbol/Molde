@@ -25,6 +25,8 @@ const ProductsList = () => import('@/views/components/ProductsList');
 const ProductsUpdate = () => import('@/views/components/ProductsUpdate');
 const Discussion = () => import('@/views/components/Discussion');
 const DiscussionDetail = () => import('@/views/components/DiscussionDetail');
+const Bank = () => import('@/views/components/Bank')
+const ListBank = () => import('@/views/components/ListBank')
 
 // Pages
 const Login = () => import('@/views/pages/Login');
@@ -173,6 +175,12 @@ function configRoutes() {
               component: DiscussionDetail,
             },
           ],
+            {
+              path: 'listBank',
+              name: 'ListBank',
+              component: ListBank
+            }
+          ]
         },
         {
           path: 'pages',
