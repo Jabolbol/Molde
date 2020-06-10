@@ -50,8 +50,9 @@ export default {
                         'Content-Type': 'multipart/form-data'
                     }
                 })
-                .then(({data, status}), resp => {
-                    if(data.code == 200) {
+                .then(resp => {
+                    console.log(resp);
+                    if(resp.data.code == 200) {
                         resolve(true);
                     }else{
                         reject(false)
