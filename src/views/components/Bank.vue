@@ -14,9 +14,9 @@
                                 class="form-control"
                                 placeholder="Masukkan Nama Bank"
                                 v-model="bank_name"
+                                required
                         >
                     </div>
-
                     <button class="btn btn-primary" type="submit">Submit</button>
                 </form>
             </div>
@@ -33,15 +33,16 @@
             }
         },
         methods: {
-            addBank() {
+            addBank(bankName) {
                 axios({
                     method: 'post',
-                    url: 'http://localhost:9000/molde/api/v1/bank/add?name=this.bank_name',
+                    // url: 'http://localhost:9000/molde/api/v1/bank/add?name=this.bank_name',
+                    url: `http://localhost:9000/molde/api/v1/bank/add?name=${bankName}`,
                     
                     // localhost:9000/molde/api/v1/bank/add?name=BNI
                 })
                     .then(response => {
-                        this.$router.push("/listBank");
+                        this.$router.push('/components/listBank');
                         console.log(response);
                         console.log(this.bank_name);
                     });

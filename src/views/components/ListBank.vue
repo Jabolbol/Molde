@@ -55,7 +55,8 @@ import axios from 'axios'
         // fetch data dari api menggunakan axios
         axios.get("http://localhost:9000/molde/api/v1/bank").then(response => {
           // mengirim data hasil fetch ke varibale array persons
-          this.bank = response.data;
+          console.log(response.data.data)
+          this.bank = response.data.data;
         });
       },
       deleteData(id) {

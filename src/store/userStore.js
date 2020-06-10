@@ -29,7 +29,7 @@ export default {
       return new Promise((resolve, reject) => {
         commit('auth_request');
         axios({ url: 'login', data: user, method: 'POST' })
-          .then(resp => {
+          .then((resp) => {
             const token = resp.data.data.token;
             localStorage.setItem('token', token);
             axios.defaults.headers.common['Authorization'] = token;
@@ -45,12 +45,13 @@ export default {
     },
     REGISTER: ({ commit }, payload) => {
       return new Promise((resolve, reject) => {
-        axios.post('account/client/register', payload, {
+        axios
+          .post('account/client/register', payload, {
             headers: {
               'Content-Type': 'multipart/form-data',
             },
           })
-          .then(resp => {
+          .then((resp) => {
             if (resp.data.code == 200) {
               resolve(true);
             } else {
