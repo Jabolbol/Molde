@@ -55,6 +55,9 @@ const actions = {
         });
     });
   },
+  replyDiscussionWs: ({ commit }, data) => {
+    commit('updResponses', data);
+  },
 };
 
 const mutations = {

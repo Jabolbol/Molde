@@ -1,34 +1,57 @@
 <template>
   <div class="discussion-room">
     <div class="discussion-question">
-      <h1>{{getDiscussion.question}}</h1>
+      <h1>{{ getDiscussion.question }}</h1>
     </div>
     <div class="discussion-responses">
       <div v-for="response in getDiscussion.responses" :key="response.id" class="response">
-        <p v-if="response.shopReplyUsername">{{response.shopReplyUsername}}</p>
-        <p v-if="response.shopUserReplyUsername">{{response.shopUserReplyUsername}}</p>
-        {{response.message}}
+        <p v-if="response.shopReplyUsername">{{ response.shopReplyUsername }}</p>
+        <p v-if="response.shopUserReplyUsername">{{ response.shopUserReplyUsername }}</p>
+        {{ response.message }}
       </div>
     </div>
     <form>
       <input type="text" v-model="detail" name="message" placeholder="Ketikkan balasan di sini" />
-      <input type="submit" value="Kirim" @click="sendResponse" />
+      <!-- <input type="submit" value="Kirim" @click="sendResponse" /> -->
+      <input type="submit" value="Kirim" @click="sendWs" />
     </form>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import SockJS from "sockjs-client";
+import Stomp from "webstomp-client";
 
 export default {
   name: "DiscussionDetail",
   data() {
     return {
-      detail: ""
+      detail: "",
+      stompClient: null
     };
   },
   methods: {
-    ...mapActions(["getDiscussionDetail", "replyDiscussion"]),
+    ...mapActions([
+      "getDiscussionDetail",
+      "replyDiscussion",
+      "replyDiscussionWs"
+    ]),
+
+    connect() {
+      var socket = new SockJS("http://localhost:9000/molde/ws");
+      this.stompClient = Stomp.over(socket);
+      this.stompClient.connect({}, frame => {
+        console.log(frame);
+        console.log("Connected to WS!");
+        this.stompClient.subscribe("/topic/discussion", resp => {
+          console.log("Reply received");
+          console.log(resp);
+          this.replyDiscussionWs(JSON.parse(resp.body));
+        });
+      });
+    },
+
     sendResponse(e) {
       e.preventDefault();
       const discussionId = this.$route.params.id;
@@ -38,10 +61,23 @@ export default {
       this.replyDiscussion({ discussionId, request }).then(resp => {
         this.detail = "";
       });
+    },
+
+    sendWs(e) {
+      e.preventDefault();
+      const discussionid = this.$route.params.id;
+      const request = { detail: this.detail };
+      this.stompClient.send(
+        `/realtime/${discussionid}/reply`,
+        JSON.stringify(request),
+        { Authorization: localStorage.getItem("token") }
+      );
+      this.detail = "";
     }
   },
   computed: mapGetters(["getDiscussion"]),
   created() {
+    this.connect();
     this.getDiscussionDetail(this.$route.params.id);
   }
 };

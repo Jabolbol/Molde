@@ -32,11 +32,13 @@
     "@coreui/utils": "^1.2.4",
     "@coreui/vue": "^3.0.5",
     "@coreui/vue-chartjs": "^1.0.4",
+    "axios": "latest",
+    "sockjs-client": "^1.4.0",
     "vue": "~2.6.11",
     "vue-axios": "^2.1.5",
     "vue-router": "~3.1.6",
     "vuex": "^3.1.3",
-    "axios": "latest"
+    "webstomp-client": "^1.2.6"
   },
   "devDependencies": {
     "@babel/core": "~7.8.7",
