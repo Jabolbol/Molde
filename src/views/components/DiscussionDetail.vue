@@ -68,7 +68,7 @@ export default {
       const discussionid = this.$route.params.id;
       const request = { detail: this.detail };
       this.stompClient.send(
-        `/realtime/${discussionid}/reply`,
+        `/v1/${discussionid}/reply`,
         JSON.stringify(request),
         { Authorization: localStorage.getItem("token") }
       );
