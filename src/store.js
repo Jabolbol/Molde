@@ -6,22 +6,22 @@ import userStore from './store/userStore'
 Vue.use(Vuex)
 
 const state = {
-  sidebarShow: 'responsive',
-  sidebarMinimize: false
+    sidebarShow: 'responsive',
+    sidebarMinimize: false
 }
 
 const mutations = {
-  set (state, [variable, value]) {
-    state[variable] = value
-  }
+    set(state, [variable, value]) {
+        state[variable] = value
+    }
 }
 
 export default new Vuex.Store({
-  modules:{
-    // state,
-    // mutations,
-    userStore,
-    // ui
-  }
+    modules: {
+        // state,
+        // mutations,
+        userStore,
+        // ui
+    }
 
 })

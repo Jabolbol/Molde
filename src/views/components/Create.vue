@@ -62,7 +62,7 @@
                         <input type="file" accept="image/*" id="image" @change="uploadImage">
                     </div>
                     <div>
-                    <button class="btn btn-primary">Submit</button>
+                        <button class="btn btn-primary">Submit</button>
                     </div>
                 </form>
             </div>
@@ -72,6 +72,7 @@
 
 <script>
     import axios from 'axios'
+
     export default {
         data() {
             return {
@@ -84,7 +85,7 @@
             }
         },
         methods: {
-            uploadImage(event){
+            uploadImage(event) {
                 console.log(event)
                 this.image = event.target.files[0]
             },
