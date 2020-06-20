@@ -5,51 +5,96 @@
     </div>
     <div class="discussion-responses">
       <div v-for="response in getDiscussion.responses" :key="response.id" class="response">
-        <p v-if="response.shopReplyUsername">{{ response.shopReplyUsername }}</p>
-        <p v-if="response.shopUserReplyUsername">{{ response.shopUserReplyUsername }}</p>
+        <p
+          v-if="response.shopReplyUsername || response.shopReplyUsername ==''"
+        >{{ response.shopReplyUsername }}</p>
+        <p
+          v-if="response.shopUserReplyUsername || response.shopUserReplyUsername ==''"
+        >{{ response.shopUserReplyUsername }}</p>
         {{ response.message }}
       </div>
     </div>
     <form>
       <input type="text" v-model="detail" name="message" placeholder="Ketikkan balasan di sini" />
-      <!-- <input type="submit" value="Kirim" @click="sendResponse" /> -->
-      <input type="submit" value="Kirim" @click="sendWs" />
+      <input type="submit" value="Kirim" @click="sendResponse" />
     </form>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 import { mapGetters, mapActions } from "vuex";
-import SockJS from "sockjs-client";
-import Stomp from "webstomp-client";
+import { firebase, messaging } from "../../firebaseConfig";
 
 export default {
   name: "DiscussionDetail",
   data() {
     return {
-      detail: "",
-      stompClient: null
+      detail: ""
     };
   },
   methods: {
     ...mapActions([
       "getDiscussionDetail",
       "replyDiscussion",
-      "replyDiscussionWs"
+      "catchDiscussionReply"
     ]),
 
     connect() {
-      var socket = new SockJS("http://localhost:9000/molde/ws");
-      this.stompClient = Stomp.over(socket);
-      this.stompClient.connect({}, frame => {
-        console.log(frame);
-        console.log("Connected to WS!");
-        this.stompClient.subscribe("/topic/discussion", resp => {
-          console.log("Reply received");
-          console.log(resp);
-          this.replyDiscussionWs(JSON.parse(resp.body));
+      const discussionId = this.$route.params.id;
+      const catchMessage = this.catchDiscussionReply;
+
+      messaging
+        .requestPermission()
+        .then(function() {
+          console.log("Permission granted");
+          return messaging.getToken();
+        })
+        .then(function(token) {
+          console.log(token);
+          axios
+            .post(`discussions/subscribe?token=${token}`)
+            .then(function(res) {
+              console.log(res);
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+        })
+        .catch(function(err) {
+          console.log(err);
         });
+
+      messaging.onMessage(function(payload) {
+        console.log("Message received");
+        const response = {
+          shopReplyUsername: payload.data.shopReplyUsername,
+          shopUserReplyUsername: payload.data.shopUserReplyUsername,
+          message: payload.data.message
+        };
+
+        if (payload.data.discussionId == discussionId) {
+          catchMessage(response);
+        }
       });
+    },
+
+    disconnect() {
+      messaging
+        .getToken()
+        .then(function(token) {
+          axios
+            .post(`discussions/unsubscribe?token=${token}`)
+            .then(function(res) {
+              console.log(res);
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
     },
 
     sendResponse(e) {
@@ -61,24 +106,15 @@ export default {
       this.replyDiscussion({ discussionId, request }).then(resp => {
         this.detail = "";
       });
-    },
-
-    sendWs(e) {
-      e.preventDefault();
-      const discussionid = this.$route.params.id;
-      const request = { detail: this.detail };
-      this.stompClient.send(
-        `/v1/${discussionid}/reply`,
-        JSON.stringify(request),
-        { Authorization: localStorage.getItem("token") }
-      );
-      this.detail = "";
     }
   },
   computed: mapGetters(["getDiscussion"]),
   created() {
     this.connect();
     this.getDiscussionDetail(this.$route.params.id);
+  },
+  beforeDestroy() {
+    this.disconnect();
   }
 };
 </script>
