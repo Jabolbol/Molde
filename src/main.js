@@ -4,7 +4,7 @@ import App from './App';
 import router from './router';
 import axios from 'axios';
 import CoreuiVue from '@coreui/vue';
-import { iconsSet as icons } from './assets/icons/icons.js';
+import {iconsSet as icons} from './assets/icons/icons.js';
 import store from './store';
 import VueAxios from 'vue-axios';
 
@@ -16,31 +16,32 @@ Vue.prototype.$log = console.log.bind(console);
 
 axios.defaults.baseURL = 'http://localhost:9000/molde/api/v1/';
 
+// If token available set is as default header
 const token = localStorage.getItem('token');
 if (token) {
-  axios.defaults.headers.common['Authorization'] = token;
+    axios.defaults.headers.common['Authorization'] = token;
 }
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (store.getters.isLoggedIn) {
-      next();
-      return;
+    if (to.matched.some((record) => record.meta.requiresAuth)) {
+        if (store.getters.isLoggedIn) {
+            next();
+            return;
+        }
+        next('/login');
+    } else {
+        next();
     }
-    next('/login');
-  } else {
-    next();
-  }
 });
 
 new Vue({
-  el: '#app',
-  router,
-  store,
-  icons,
-  template: '<App/>',
-  components: {
-    App,
-  },
-  render: (h) => h(App),
+    el: '#app',
+    router,
+    store,
+    icons,
+    template: '<App/>',
+    components: {
+        App,
+    },
+    render: (h) => h(App),
 }).$mount('#app');

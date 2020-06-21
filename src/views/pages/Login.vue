@@ -1,74 +1,61 @@
 <template>
-  <CContainer class="d-flex content-center min-vh-100">
-    <CCard class="p-4">
-      <CCardBody>
-        <Form @submit="login">
-          <h1>Login</h1>
+    <CContainer class="d-flex content-center min-vh-100">
+        <CCard class="p-4">
+            <CCardBody>
+                <Form>
+                    <h1>Welcome to Molde</h1>
+                    <p class="text-muted">Sign In to your account</p>
+                    <CInput type="email" placeholder="Email" v-model="email" autocomplete="username email">
+                        <template #prepend-content>
+                            <CIcon name="cil-user"/>
+                        </template>
+                    </CInput>
 
-          <p class="text-muted">Sign In to your account</p>
-          <CInput type="email" placeholder="email" v-model="email" autocomplete="username email">
-            <template #prepend-content>
-              <CIcon name="cil-user" />
-            </template>
-          </CInput>
+                    <CInput placeholder="Password" type="Password" v-model="password" autocomplete="current-password">
+                        <template #prepend-content>
+                            <CIcon name="cil-lock-locked"/>
+                        </template>
+                    </CInput>
 
-          <CInput
-            placeholder="Password"
-            type="password"
-            v-model="password"
-            autocomplete="curent-password"
-          >
-            <template #prepend-content>
-              <CIcon name="cil-lock-locked" />
-            </template>
-          </CInput>
+                    <CRow>
+                        <CCol col="6" class="text-left">
+                            <CButton type="submit" color="primary" class="px-4" @click.prevent="login()">Login</CButton>
+                        </CCol>
 
-          <CRow>
-            <CCol col="6" class="text-left">
-              <CButton type="submit" color="primary" class="px-4" @click.prevent="login()">Login</CButton>
-            </CCol>
-
-            <CCol col="6" class="text-right">
-              <router-link to="./register" class="btn btn-link">Register</router-link>
-            </CCol>
-          </CRow>
-        </Form>
-      </CCardBody>
-    </CCard>
-  </CContainer>
+                        <CCol col="6" class="text-right">
+                            <router-link to="register" class="btn btn-link">Register</router-link>
+                        </CCol>
+                    </CRow>
+                </Form>
+            </CCardBody>
+        </CCard>
+    </CContainer>
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+    import {mapActions} from "vuex";
 
-export default {
-  name: "login",
-  data: () => ({
-    email: "",
-    password: "",
-    error: false
-  }),
-  methods: {
-    ...mapActions(["LOGIN"]),
-    doLogin() {
-      let email = this.email;
-      let password = this.password;
+    export default {
+        name: "login",
+        data: () => ({
+            email: "",
+            password: "",
+        }),
+        methods: {
+            ...mapActions(["doLogin"]),
+            login() {
+                const router = this.$router;
+                const email = this.email;
+                const password = this.password;
 
-      this.LOGIN({ email, password });
-    },
-    login() {
-      console.log(this.$store);
-      let email = this.email;
-      let password = this.password;
-      this.$store
-        .dispatch("LOGIN", { email, password })
-        .then(() => this.$router.push("/"))
-        .catch(error => {
-          alert("Login failed");
-          this.error = true;
-          console.log(error);
-        });
-    }
-  }
-};
+                this.doLogin({email, password})
+                    .then(function () {
+                        router.push("/");
+                    }).catch(function (err) {
+                    console.log(err);
+                    alert("Login failed");
+                });
+            }
+        }
+    };
 </script>

@@ -6,7 +6,6 @@ const TheContainer = () => import('@/containers/TheContainer');
 
 // Views
 const Dashboard = () => import('@/views/Dashboard');
-
 const Charts = () => import('@/views/charts/Charts');
 const Widgets = () => import('@/views/widgets/Widgets');
 
