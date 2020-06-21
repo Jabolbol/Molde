@@ -2,8 +2,7 @@
     <div>
         <div class="row">
             <div class="col-md-6">
-                <br>
-                <br>
+                <br><br>
                 <h4>Create new data</h4>
                 <br>
                 <!-- prevent form submit untuk reload halaman, kemudian memanggil function addData() -->
@@ -86,10 +85,8 @@
         },
         methods: {
             uploadImage(event) {
-                console.log(event)
                 this.image = event.target.files[0]
             },
-
             addData() {
                 // post data ke api menggunakan axios
                 const formData = new FormData();
@@ -105,10 +102,10 @@
                     url: 'http://localhost:9000/molde/api/v1/product/add',
                     data: formData,
                 })
-                    .then(response => {
-                        // push rou ter ke read data
-                        this.$router.push("/components/products");
-                    });
+                .then(response => {
+                    // push router ke read data
+                    this.$router.push("/components/productsList");
+                });
             }
         }
     };
