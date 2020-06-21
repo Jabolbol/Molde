@@ -23,6 +23,7 @@ const RequestToko = () => import('@/views/components/RequestToko')
 const ProductsList = () => import('@/views/components/ProductsList')
 const ProductsUpdate = () => import('@/views/components/ProductsUpdate')
 const UpdateResi = () => import('@/views/components/UpdateResi')
+const RequestList = () => import('@/views/components/RequestList')
 
 // Pages
 const Login = () => import('@/views/pages/Login')
@@ -160,6 +161,11 @@ function configRoutes() {
                             path: 'updateResi/:id',
                             name: 'UpdateResi',
                             component: UpdateResi
+                        },
+                        {
+                            path: 'requestList',
+                            name: 'RequestList',
+                            component: RequestList
                         }
                     ]
                 },
