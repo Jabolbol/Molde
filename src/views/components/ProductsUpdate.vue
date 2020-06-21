@@ -1,13 +1,15 @@
 <template xmlns:src="http://www.w3.org/1999/xhtml">
     <div>
         <div class="row">
+            <div class="col-md-4">
+                <h3>Update Products</h3>
+                <br>
+                <img :src="'http://localhost:9000/' + this.$route.params.id" :alt="name"
+                     class="card-img-top">
+            </div>
             <div class="col-md-6">
-                <br>
-                <br>
-                <h4>Create new data</h4>
-                <br>
-                <!-- prevent form submit untuk reload halaman, kemudian memanggil function addData() -->
-                <form @submit.prevent="updateArticle(id)">
+                <!-- prevent form submit untuk reload halaman, kemudian memanggil function updateData() -->
+                <form @submit.prevent="updateData()">
                     <div class="form-group">
                         <label>Nama Barang</label>
                         <input
@@ -64,7 +66,9 @@
         </div>
     </div>
 </template>
+
 <script>
+    import axios from 'axios'
     export default {
         data() {
             return {
@@ -76,46 +80,34 @@
                 stock: ''
             }
         },
-        mounted() {
-            this.id = this.$route.params.id // id of the article
-            this.fetchArticle(this.id)
+        created() {
+            // load data saat pertama kali halaman dibuka
+            this.loadData();
         },
         methods: {
-            /**
-             * used to fetch the article to updated
-             * @return {[type]} [description]
-             */
-            fetchArticle(id) {
-                const URL = 'http://localhost:9000/molde/api/v1/product/' + id + '/detail'
-                this.$axios({
-                    method: 'get',
-                    url: URL,
-                })
-                    .then(res => {
-                        // eslint-disable-next-line
-                        const {name, description} = res.data.data
-                        // eslint-disable-next-line
-                        this.article_title = name
-                        // eslint-disable-next-line
-                        this.article_description = description
-                    })
-                    .catch(err => {
-                        // eslint-disable-next-line
-                        console.log(err)
-                    })
+            loadData() {
+                // load data berdasarkan id
+                axios
+                    .get("http://localhost:9000/molde/api/v1/product/" + this.$route.params.id + "/detail")
+                    .then(response => {
+                        // post value yang dari response ke form
+                        this.name = response.data.data.name;
+                        this.description = response.data.data.description;
+                        this.weight = response.data.data.weight;
+                        this.price = response.data.data.price;
+                        this.stock = response.data.data.stock;
+                    });
             },
-            /**
-             * [updateArticle used to Update Article]
-             */
-            updateArticle(id) {
-                // eslint-disable-next-line
-                const {name, description} = this
-                const data = {name, description}
-                const URL = 'http://localhost:9000/molde/api/v1/product/' + id + '/update'
-                this.$axios({
-                    method: 'put',
-                    url: URL,
-                    data: data
+            updateData() {
+                axios
+                .put("http://localhost:9000/molde/api/v1/product/" + this.$route.params.id + "/update", {
+                    name: this.name,
+                    description: this.description,
+                    weight : this.weight,
+                    price : this.price,
+                    stock : this.stock,
+
+
                 })
                     .then(_ => {
                         this.$router.push('/app')

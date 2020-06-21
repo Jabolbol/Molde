@@ -69,14 +69,18 @@
                         >
                     </div>
                     <div class="form-group">
-                        <label>Category</label>
-                        <input
-                                type="textfield"
-                                class="form-control"
-                                placeholder="Masukkan Deskripsi"
+                        <CSelect
+                                label="Kategori"
+                                :options="[
+                                    'Makanan & Minuman',
+                                    'Fashion',
+                                    'Elektronik',
+                                    'Kesehatan',
+                                    'Ibu & Bayi',
+                                    'Perlengkapan Rumah'
+                                ]"
                                 v-model="category"
-                                required
-                        >
+                        />
                     </div>
                     <div>
                         <button class="btn btn-primary">Submit</button>
