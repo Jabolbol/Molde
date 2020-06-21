@@ -32,29 +32,60 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <modal v-show="isModalVisible" @close="closeModal">
-      <template v-slot:header>
-        <h1>Detail Produk</h1>
-        <button type="button" class="btn-close" @click="closeModal">X</button>
-      </template>
-      <template v-slot:body>
-        <div class="col-md-3">
-          <img
-            :src="'http://localhost:9000' + currProduct.image"
-            :alt="currProduct.name"
-            class="card-img-top"
-          />
-          <h3>{{currProduct.name}}</h3>
+        <modal v-show="isModalVisible" @close="closeModal">
+            <template v-slot:header>
+                <h1>Detail Produk</h1>
+                <button type="button" class="btn-close" @click="closeModal">X</button>
+            </template>
+            <template v-slot:body>
+                <div class="row">
+                    <div class="col-md-4">
+                        <img :src="'http://localhost:9000' + currProduct.image" :alt="currProduct.name"
+                             class="card-img-top">
+                    </div>
+                    <div class="col-sm-6">
+                        <h3> {{currProduct.name}} </h3>
+                        <br>
+                        <div class="form-group">
+                            <label>Berat</label>
+                            <input class="form-control"
+                                   v-model="currProduct.weight"
+                                   disabled
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label>Harga</label>
+                            <input type="text" class="form-control"
+                                   v-model="currProduct.price"
+                                   disabled
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label>Stock</label>
+                            <input type="text" class="form-control"
+                                   v-model="currProduct.stock"
+                                   disabled
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label>Deskripsi</label>
+                            <input type="text" class="form-control"
+                                   v-model="currProduct.description"
+                                   disabled
+                                   horizontal
+                            />
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <template v-slot:footer>
+                <router-link class="btn btn-warning" :to="'productsUpdate/'+currProduct.id">Update</router-link>
+                <button class="btn btn-danger" v-on:click="deleteData(product.id)">Delete</button>
+            </template>
+        </modal>
         </div>
-      </template>
-      <template v-slot:footer>
-        <button class="btn btn-primary" @click="closeModal">Ubah</button>
-        <button class="btn btn-primary" @click="closeModal">Tutup</button>
-      </template>
-    </modal>
+    </div>
   </div>
 </template>
 
