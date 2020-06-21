@@ -26,8 +26,9 @@
             <tr v-for="bank in banks" :key="bank.id">
               <td style="width:40%">{{bank.name}}</td>
               <td style="width:20%">
-                <router-link class="btn btn-warning" :to="'/listbank/'+bank.id">Update</router-link>
-                <button class="btn btn-danger" v-on:click="deleteData(bank.id)">Delete</button>
+                <!-- <router-link class="btn btn-warning" :to="'/listbank/'+bank.id">Update</router-link>
+                <button class="btn btn-danger" v-on:click="deleteData(bank.id)">Delete</button> -->
+                <button type="button"  @click="edit(bank)">Update</button>  <button @click="del(bank.id)">Delete</button>
               </td>
             </tr>
           </tbody>
@@ -59,10 +60,10 @@ export default {
         this.banks = response.data.data;
       });
     },
-    deleteData(id) {
+    del(id) {
       // delete data
       axios
-        .delete("http://localhost:9000/molde/api/v1/bank" + id)
+        .delete("http://localhost:9000/molde/api/v1/banks" + id +"/remove")
         .then(response => {
           this.loadData();
         });

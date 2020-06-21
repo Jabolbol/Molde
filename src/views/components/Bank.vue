@@ -41,7 +41,8 @@ export default {
       }).then(response => {
         this.$router.push("/components/listBank");
       });
-    }
+    },
+    
   }
 };
 </script>
