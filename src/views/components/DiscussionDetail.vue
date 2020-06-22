@@ -1,13 +1,17 @@
 <template>
   <div class="discussion-room">
     <div class="discussion-question">
-      <h1>{{getDiscussion.question}}</h1>
+      <h1>{{ getDiscussion.question }}</h1>
     </div>
     <div class="discussion-responses">
       <div v-for="response in getDiscussion.responses" :key="response.id" class="response">
-        <p v-if="response.shopReplyUsername">{{response.shopReplyUsername}}</p>
-        <p v-if="response.shopUserReplyUsername">{{response.shopUserReplyUsername}}</p>
-        {{response.message}}
+        <p
+          v-if="response.shopReplyUsername || response.shopReplyUsername ==''"
+        >{{ response.shopReplyUsername }}</p>
+        <p
+          v-if="response.shopUserReplyUsername || response.shopUserReplyUsername ==''"
+        >{{ response.shopUserReplyUsername }}</p>
+        {{ response.message }}
       </div>
     </div>
     <form>
@@ -18,7 +22,9 @@
 </template>
 
 <script>
+import axios from "axios";
 import { mapGetters, mapActions } from "vuex";
+import { firebase, messaging } from "../../firebaseConfig";
 
 export default {
   name: "DiscussionDetail",
@@ -28,7 +34,69 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["getDiscussionDetail", "replyDiscussion"]),
+    ...mapActions([
+      "getDiscussionDetail",
+      "replyDiscussion",
+      "catchDiscussionReply"
+    ]),
+
+    connect() {
+      const discussionId = this.$route.params.id;
+      const catchMessage = this.catchDiscussionReply;
+
+      messaging
+        .requestPermission()
+        .then(function() {
+          console.log("Permission granted");
+          return messaging.getToken();
+        })
+        .then(function(token) {
+          console.log(token);
+          axios
+            .post(`discussions/subscribe?token=${token}`)
+            .then(function(res) {
+              console.log(res);
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+
+      messaging.onMessage(function(payload) {
+        console.log("Message received");
+        const response = {
+          shopReplyUsername: payload.data.shopReplyUsername,
+          shopUserReplyUsername: payload.data.shopUserReplyUsername,
+          message: payload.data.message
+        };
+
+        if (payload.data.discussionId == discussionId) {
+          catchMessage(response);
+        }
+      });
+    },
+
+    disconnect() {
+      messaging
+        .getToken()
+        .then(function(token) {
+          axios
+            .post(`discussions/unsubscribe?token=${token}`)
+            .then(function(res) {
+              console.log(res);
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
+
     sendResponse(e) {
       e.preventDefault();
       const discussionId = this.$route.params.id;
@@ -42,7 +110,11 @@ export default {
   },
   computed: mapGetters(["getDiscussion"]),
   created() {
+    this.connect();
     this.getDiscussionDetail(this.$route.params.id);
+  },
+  beforeDestroy() {
+    this.disconnect();
   }
 };
 </script>

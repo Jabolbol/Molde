@@ -69,18 +69,20 @@
                         >
                     </div>
                     <div class="form-group">
-                        <CSelect
-                                label="Kategori"
-                                :options="[
-                                    'Makanan & Minuman',
-                                    'Fashion',
-                                    'Elektronik',
-                                    'Kesehatan',
-                                    'Ibu & Bayi',
-                                    'Perlengkapan Rumah'
-                                ]"
-                                v-model="category"
-                        />
+                        <label>Kategory</label>
+                        <select class="form-control" v-model="category">
+                            <option value="1">Makanan & Minuman</option>
+                            <option value="2">Fashion</option>
+                            <option value="3">Elektronik</option>
+                        </select>
+<!--                        <CSelect-->
+<!--                               :options="['Makanan & Minuman',-->
+<!--                               'Fashion',-->
+<!--                               'Elektronik',-->
+<!--                               'Kesehatan',-->
+<!--                               'Perlengkapan rumah']"-->
+<!--                               v-model="category"-->
+<!--                        />-->
                     </div>
                     <div>
                         <button class="btn btn-primary">Submit</button>

@@ -16,18 +16,23 @@ Vue.prototype.$log = console.log.bind(console);
 
 axios.defaults.baseURL = 'http://localhost:9000/molde/api/v1/';
 
+// If token already available, set is as default header
 const token = localStorage.getItem('token');
 if (token) {
   axios.defaults.headers.common['Authorization'] = token;
 }
 
+// Check if user is authenticated before each route
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (store.getters.isLoggedIn) {
+    if (
+      localStorage.getItem('token') === null ||
+      localStorage.getItem('token') === ''
+    ) {
+      next('/pages/login');
+    } else {
       next();
-      return;
     }
-    next('/login');
   } else {
     next();
   }
@@ -35,12 +40,12 @@ router.beforeEach((to, from, next) => {
 
 new Vue({
   el: '#app',
-  router,
-  store,
-  icons,
   template: '<App/>',
   components: {
     App,
   },
+  router,
+  store,
+  icons,
   render: (h) => h(App),
 }).$mount('#app');

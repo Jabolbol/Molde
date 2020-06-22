@@ -6,7 +6,6 @@ const TheContainer = () => import('@/containers/TheContainer');
 
 // Views
 const Dashboard = () => import('@/views/Dashboard');
-
 const Charts = () => import('@/views/charts/Charts');
 const Widgets = () => import('@/views/widgets/Widgets');
 
@@ -19,6 +18,8 @@ const Create = () => import('@/views/components/Create');
 const Orders = () => import('@/views/components/Orders');
 const Shipment = () => import('@/views/components/ContohForm');
 const DetailOrder = () => import('@/views/components/DetailOrder');
+const UpdateResi = () => import('@/views/components/UpdateResi');
+const RequestList = () => import('@/views/components/RequestList');
 const RequestToko = () => import('@/views/components/RequestToko');
 const ProductsList = () => import('@/views/components/ProductsList');
 const ProductsUpdate = () => import('@/views/components/ProductsUpdate');
@@ -52,6 +53,7 @@ function configRoutes() {
       redirect: '/dashboard',
       name: 'Home',
       component: TheContainer,
+      meta: { requiresAuth: true },
       children: [
         {
           path: 'dashboard',
@@ -145,9 +147,19 @@ function configRoutes() {
               component: DetailOrder,
             },
             {
+              path: 'updateResi/:id',
+              name: 'UpdateResi',
+              component: UpdateResi,
+            },
+            {
               path: 'request',
               name: 'RequestToko',
               component: RequestToko,
+            },
+            {
+              path: 'requestList',
+              name: 'RequestList',
+              component: RequestList,
             },
             {
               path: 'productsList',
@@ -186,26 +198,28 @@ function configRoutes() {
             },
           ],
         },
+      ],
+    },
+    {
+      path: '/pages',
+      name: 'Pages',
+      component: {
+        render(c) {
+          return c('router-view');
+        },
+      },
+      children: [
         {
-          path: 'pages',
-          name: 'Pages',
-          component: {
-            render(c) {
-              return c('router-view');
-            },
-          },
-          children: [
-            {
-              path: 'login',
-              name: 'Login',
-              component: Login,
-            },
-            {
-              path: 'register',
-              name: 'Register',
-              component: Register,
-            },
-          ],
+          path: 'login',
+          name: 'Login',
+          component: Login,
+          meta: { requiresAuth: false },
+        },
+        {
+          path: 'register',
+          name: 'Register',
+          component: Register,
+          meta: { requiresAuth: false },
         },
       ],
     },

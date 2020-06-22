@@ -44,9 +44,7 @@ const actions = {
         url: `discussions/${discussionId}/reply`,
         data: request,
       })
-        .then((resp) => {
-          const response = resp.data.data;
-          commit('updResponses', response);
+        .then(() => {
           resolve(true);
         })
         .catch((err) => {
@@ -54,6 +52,9 @@ const actions = {
           reject(err);
         });
     });
+  },
+  catchDiscussionReply: ({ commit }, data) => {
+    commit('updResponses', data);
   },
 };
 
