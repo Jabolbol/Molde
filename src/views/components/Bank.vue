@@ -29,17 +29,21 @@ import axios from "axios";
 export default {
   data() {
     return {
-      bank_name: ""
+      bank_name: ''
     };
   },
   methods: {
-    addBank() {
-      const url = `bank/add?name=${this.bank_name}`;
+    addBank(bankName) {
+      
       axios({
         method: "post",
         url: `bank/add?name=${this.bank_name}`
+        
+
       }).then(response => {
         this.$router.push("/components/listBank");
+        console.log(response);
+        console.log(this.bank_name);
       });
     },
     

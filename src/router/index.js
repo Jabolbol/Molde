@@ -17,7 +17,6 @@ const Tabs = () => import('@/views/components/Table');
 const Products = () => import('@/views/components/Products');
 const Create = () => import('@/views/components/Create');
 const Orders = () => import('@/views/components/Orders');
-const Payment = () => import('@/views/components/MenungguPembayaran');
 const Shipment = () => import('@/views/components/ContohForm');
 const DetailOrder = () => import('@/views/components/DetailOrder');
 const RequestToko = () => import('@/views/components/RequestToko');
@@ -27,6 +26,7 @@ const Discussion = () => import('@/views/components/Discussion');
 const DiscussionDetail = () => import('@/views/components/DiscussionDetail');
 const ListBank = () => import('@/views/components/ListBank');
 const Bank = () => import('@/views/components/Bank');
+const BankUpdate = () => import('@/views/components/BankUpdate');
 
 // Pages
 const Login = () => import('@/views/pages/Login');
@@ -135,11 +135,6 @@ function configRoutes() {
               component: Orders,
             },
             {
-              path: 'payment',
-              name: 'Payment',
-              component: Payment,
-            },
-            {
               path: 'shipment',
               name: 'Shipment',
               component: Shipment,
@@ -183,6 +178,11 @@ function configRoutes() {
               path: 'bank',
               name: 'Bank',
               component: Bank,
+            },
+            {
+              path: 'bankUpdate',
+              name: 'BankUpdate',
+              component: BankUpdate,
             },
           ],
         },
