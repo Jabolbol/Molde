@@ -14,12 +14,6 @@ export default [
       },
       {
         _name: 'CSidebarNavItem',
-        name: 'Toko',
-        to: '/base/tables',
-        icon: 'cil-star',
-      },
-      {
-        _name: 'CSidebarNavItem',
         name: 'User',
         to: '/users',
         icon: 'cil-star',
@@ -40,12 +34,6 @@ export default [
         _name: 'CSidebarNavItem',
         name: 'Discussion',
         to: '/components/discussion',
-        icon: 'cil-star',
-      },
-      {
-        _name: 'CSidebarNavItem',
-        name: 'Bank',
-        to: '/components/listBank',
         icon: 'cil-star',
       },
       {

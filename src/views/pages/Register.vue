@@ -140,7 +140,7 @@
                     }).catch((err) => {
                         console.log(err);
                         alert("Register failed");
-                    })D
+                    });
                 }
             },
             valid() {

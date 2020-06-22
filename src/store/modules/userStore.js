@@ -33,8 +33,10 @@ export default {
                     data: request
                 }).then((resp) => {
                     const token = resp.data.data.token;
+                    const role = resp.data.data.role;
                     axios.defaults.headers.common['Authorization'] = token;
                     localStorage.setItem('token', token);
+                    localStorage.setItem('role', role);
                     commit('auth_success', token, request);
                     resolve(resp);
                 }).catch((err) => {
