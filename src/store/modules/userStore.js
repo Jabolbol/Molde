@@ -22,6 +22,9 @@ export default {
         auth_error: (state) => {
             state.status = 'error';
         },
+        logout: (state) => {
+            state.token = null;
+        }
     },
     actions: {
         doLogin: ({commit}, request) => {
@@ -45,6 +48,11 @@ export default {
                     reject(err);
                 });
             });
+        },
+        doLogout: ({commit}) => {
+            localStorage.removeItem("token");
+            localStorage.removeItem("role");
+            commit("logout");
         },
         doRegister: ({commit}, request) => {
             return new Promise((resolve, reject) => {

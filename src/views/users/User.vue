@@ -24,6 +24,7 @@
 
 <script>
     import usersData from './UsersData'
+    import axios from 'axios'
 
     export default {
         name: 'User',
@@ -45,7 +46,8 @@
                 ]
             },
             userData() {
-                const id = this.$route.params.id
+                this.loadUser();
+                const id = this.$route.params.email
                 const user = usersData.find((user, index) => index + 1 == id)
                 const userDetails = user ? Object.entries(user) : [['id', 'Not found']]
                 return userDetails.map(([key, value]) => {
@@ -57,6 +59,17 @@
             },
             username() {
                 return this.userData.filter(param => param.key === 'username')[0].value
+            },
+            loadUser() {
+                console.log("in");
+                const email = this.$route.params.email;
+                axios.get(`/shopuser/info?email=${email}`)
+                    .then((response) => {
+                        console.log(response);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    })
             }
         },
         methods: {

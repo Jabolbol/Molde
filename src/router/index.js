@@ -27,6 +27,7 @@ const Discussion = () => import('@/views/components/Discussion');
 const DiscussionDetail = () => import('@/views/components/DiscussionDetail');
 const ListBank = () => import('@/views/components/ListBank');
 const Bank = () => import('@/views/components/Bank');
+const ExportData = () => import('@/views/components/ExportData');
 
 // Pages
 const Login = () => import('@/views/pages/Login');
@@ -86,7 +87,7 @@ function configRoutes() {
               component: Users,
             },
             {
-              path: ':id',
+              path: ':email',
               meta: {
                 label: 'User Details',
               },
@@ -190,6 +191,11 @@ function configRoutes() {
               name: 'Bank',
               component: Bank,
             },
+            {
+              path: 'export-data',
+              name: 'Export',
+              component: ExportData,
+            }
           ],
         },
       ],

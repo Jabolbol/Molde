@@ -9,6 +9,9 @@
                     <div class="col-md-10">
                         <h4>Orders</h4>
                     </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-primary w-100" @click="exportOrder">Export</button>
+                    </div>
                 </div>
                 <br>
                 <table class="table">
@@ -91,17 +94,17 @@
     </div>
 </template>
 
-<!-- script js -->
 <script>
-    import axios from 'axios'
+    import Axios from 'axios';
+    import axios from 'axios';
     import modal from "./Modal";
+
     export default {
         components: {
             modal,
         },
         data() {
             return {
-                // variable array yang akan menampung hasil fetch dari api
                 orders: [],
                 currOrder: {},
                 isModalVisible: false
@@ -119,22 +122,37 @@
                 this.isModalVisible = false;
             },
             loadData() {
-                // fetch data dari api menggunakan axios
-                axios.get("http://localhost:9000/molde/api/v1/order/shop/get").then(response => {
-                    // mengirim data hasil fetch ke varibale array persons
+                axios.get("/order/shop/get").then(response => {
                     console.log(response.data.data)
                     this.orders = response.data.data;
                 });
             },
             acceptOrder(id) {
-                axios.post("http://localhost:9000/molde/api/v1/order/" + id + "/accept").then(response => {
+                axios.post("/order/" + id + "/accept").then(response => {
                     this.loadData();
                 });
             },
             cancelOrder(id) {
-                axios.post("http://localhost: 9000/molde/api/v1/order/" + id + "/cancel").then(response => {
+                axios.post("/order/" + id + "/cancel").then(response => {
                     this.loadData();
                 });
+            },
+            exportOrder() {
+                Axios({
+                    url: '/order/export',
+                    method: 'GET',
+                    responseType: 'blob',
+                }).then((response) => {
+                    const url = window.URL.createObjectURL(new Blob([response.data]));
+                    const link = document.createElement('a');
+
+                    link.href = url;
+                    link.setAttribute('download', 'orders.xlsx');
+                    document.body.appendChild(link);
+                    link.click();
+                }).catch((error) => {
+                    console.log(error);
+                })
             }
         }
     };
