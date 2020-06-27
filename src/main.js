@@ -16,7 +16,7 @@ Vue.prototype.$log = console.log.bind(console);
 
 axios.defaults.baseURL = 'http://localhost:9000/molde/api/v1/';
 
-// If token already available, set is as default header
+// If token already available, set is as defaulit header
 const token = localStorage.getItem('token');
 if (token) {
   axios.defaults.headers.common['Authorization'] = token;
