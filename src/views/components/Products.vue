@@ -6,10 +6,11 @@
                 <br>
                 <br>
                 <div class="row">
-                    <div class="col-md-10">
+                    <div class="col-md-8">
                         <h4>Products</h4>
                     </div>
-                    <div class="colmd-2">
+
+                    <div class="col-md-2">
                         <!-- push router ke form membuat data -->
                         <router-link class="btn btn-primary w-100" to="create">+ Tambah</router-link>
                     </div>
@@ -76,6 +77,7 @@
                     this.loadData();
                 });
             },
+
         }
     };
 </script>

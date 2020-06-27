@@ -37,6 +37,12 @@ export default [
         icon: 'cil-star',
       },
       {
+        _name: 'CSidebarNavItem',
+        name: 'Export Data',
+        to: '/components/export-data',
+        icon: 'cil-star',
+      },
+      {
         _name: 'CSidebarNavDivider',
         _class: 'm-2',
       },

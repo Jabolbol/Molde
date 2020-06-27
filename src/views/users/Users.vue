@@ -17,15 +17,7 @@
                             @row-clicked="rowClicked"
                             :pagination="{ doubleArrows: false, align: 'center'}"
                             @page-change="pageChange"
-                    >
-                        <template #status="data">
-                            <td>
-                                <CBadge :color="getBadge(data.item.status)">
-                                    {{data.item.status}}
-                                </CBadge>
-                            </td>
-                        </template>
-                    </CDataTable>
+                    />
                 </CCardBody>
             </CCard>
         </CCol>
@@ -34,17 +26,18 @@
 
 <script>
     import usersData from './UsersData'
+    import axios from 'axios';
 
     export default {
         name: 'Users',
         data() {
             return {
-                items: usersData,
+                items: [],
                 fields: [
-                    {key: 'username', label: 'Name', _classes: 'font-weight-bold'},
-                    {key: 'registered'},
-                    {key: 'role'},
-                    {key: 'status'}
+                    {key: 'firstName'},
+                    {key: 'lastName'},
+                    {key: 'email', _classes: 'font-weight-bold'},
+                    {key: 'phoneNo',}
                 ],
                 activePage: 1
             }
@@ -79,7 +72,18 @@
             },
             pageChange(val) {
                 this.$router.push({query: {page: val}})
+            },
+            getShopUsers() {
+                axios.get("/shopuser/get-by-shop")
+                    .then((response) => {
+                        this.items = response.data.data;
+                    }).catch((error) => {
+                        console.log(error);
+                    })
             }
+        },
+        created() {
+            this.getShopUsers();
         }
     }
 </script>
