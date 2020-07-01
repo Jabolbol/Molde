@@ -27,11 +27,7 @@ const Discussion = () => import('@/views/components/Discussion');
 const DiscussionDetail = () => import('@/views/components/DiscussionDetail');
 const ListBank = () => import('@/views/components/ListBank');
 const Bank = () => import('@/views/components/Bank');
-<<<<<<< HEAD
 const BankUpdate = () => import('@/views/components/BankUpdate');
-=======
-const ExportData = () => import('@/views/components/ExportData');
->>>>>>> e41cec08c51b67c43e051289911979093452e25e
 
 // Pages
 const Login = () => import('@/views/pages/Login');
@@ -196,17 +192,10 @@ function configRoutes() {
               component: Bank,
             },
             {
-<<<<<<< HEAD
               path: 'bankUpdate',
               name: 'BankUpdate',
               component: BankUpdate,
             },
-=======
-              path: 'export-data',
-              name: 'Export',
-              component: ExportData,
-            }
->>>>>>> e41cec08c51b67c43e051289911979093452e25e
           ],
         },
       ],

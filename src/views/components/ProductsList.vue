@@ -1,52 +1,6 @@
 <template>
     <div>
         <div class="row">
-<<<<<<< HEAD
-          <div class="col-md-10">
-            <h4>Daftar Produk</h4>
-          </div>
-          <div class="col-md-2">
-            <router-link class="btn btn-primary w-100" to="create">+ Tambah</router-link>
-          </div>
-        </div>
-        <br />
-        <h1>Helloo</h1>
-        <div class="row">
-          <div class="col-md-3" v-for="product in products" :key="product.id">
-            <div class="card">
-              <img
-                :src="'http://localhost:9000' + product.image"
-                :alt="product.name"
-                class="card-img-top"
-              />
-              <div class="card-body">
-                <h4 class="card-title">{{ product.name }}</h4>
-                <div class="card-text">Rp. {{ product.price }}</div>
-                <div class="row justify-content-end">
-                  <!-- <router-link class="btn btn-primary" to="productsUpdate">Detail</router-link> -->
-                  <button type="button" class="btn btn-primary" @click="showModal(product)">Detail</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <modal v-show="isModalVisible" @close="closeModal">
-      <template v-slot:header>
-        <h1>Detail Produk</h1>
-        <button type="button" class="btn-close" @click="closeModal">X</button>
-      </template>
-      <template v-slot:body>
-        <div class="col-md-3">
-          <img
-            :src="'http://localhost:9000' + currProduct.image"
-            :alt="currProduct.name"
-            class="card-img-top"
-          />
-          <h3>{{currProduct.name}}</h3>
-=======
             <div class="col-md-12">
                 <br/>
                 <br/>
@@ -135,10 +89,7 @@
                     </template>
                 </modal>
             </div>
->>>>>>> e41cec08c51b67c43e051289911979093452e25e
         </div>
-      </template>
-    </modal>
     </div>
 </template>
 
@@ -175,9 +126,8 @@
                     });
             },
             deleteData(id) {
-                axios
-                    .delete("http://localhost:9000/molde/api/v1/product/" + id + "/delete")
-                    .then(response => {
+                axios.delete("http://localhost:9000/molde/api/v1/product/" + id + "/delete")
+                    .then(() => {
                         this.loadData();
                     });
             },
