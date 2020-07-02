@@ -1,9 +1,9 @@
 <template>
     <CRow>
-        <CCol col="12" xl="8">
+        <CCol>
             <CCard>
                 <CCardHeader>
-                    Users
+                    <h1>Daftar Pengguna</h1>
                 </CCardHeader>
                 <CCardBody>
                     <CDataTable
@@ -77,9 +77,13 @@
                 axios.get("/shopuser/get-by-shop")
                     .then((response) => {
                         this.items = response.data.data;
-                    }).catch((error) => {
-                        console.log(error);
                     })
+                    .catch((error) => {
+                        if (error.message === "Request failed with status code 401") {
+                            console.log(error);
+                            this.$router.push("/pages/login");
+                        }
+                    });
             }
         },
         created() {
