@@ -23,7 +23,7 @@
 </template>
 
 <script>
-    import usersData from './UsersData'
+    import usersData from '../users/UsersData'
     import axios from 'axios'
 
     export default {
@@ -60,8 +60,12 @@
             username() {
                 return this.userData.filter(param => param.key === 'username')[0].value
             },
+        },
+        methods: {
+            goBack() {
+                this.usersOpened ? this.$router.go(-1) : this.$router.push({path: '/users'})
+            },
             loadUser() {
-                console.log("in");
                 const email = this.$route.params.email;
                 axios.get(`/shopuser/info?email=${email}`)
                     .then((response) => {
@@ -70,11 +74,6 @@
                     .catch((error) => {
                         console.log(error);
                     })
-            }
-        },
-        methods: {
-            goBack() {
-                this.usersOpened ? this.$router.go(-1) : this.$router.push({path: '/users'})
             }
         }
     }

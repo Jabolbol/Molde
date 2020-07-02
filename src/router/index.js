@@ -6,13 +6,8 @@ const TheContainer = () => import('@/containers/TheContainer');
 
 // Views
 const Dashboard = () => import('@/views/Dashboard');
-const Charts = () => import('@/views/charts/Charts');
-const Widgets = () => import('@/views/widgets/Widgets');
 
 // Views - Components
-const Breadcrumbs = () => import('@/views/components/Breadcrumbs');
-const Tables = () => import('@/views/components/Tables');
-const Tabs = () => import('@/views/components/Table');
 const Products = () => import('@/views/components/Products');
 const Create = () => import('@/views/components/Create');
 const Orders = () => import('@/views/components/Orders');
@@ -34,8 +29,8 @@ const Login = () => import('@/views/pages/Login');
 const Register = () => import('@/views/pages/Register');
 
 // Users
-const Users = () => import('@/views/users/Users');
-const User = () => import('@/views/users/User');
+const Users = () => import('@/views/components/Users');
+const User = () => import('@/views/components/User');
 
 Vue.use(Router);
 
@@ -61,44 +56,7 @@ function configRoutes() {
           component: Dashboard,
         },
         {
-          path: 'charts',
-          name: 'Charts',
-          component: Charts,
-        },
-        {
-          path: 'widgets',
-          name: 'Widgets',
-          component: Widgets,
-        },
-        {
-          path: 'users',
-          meta: {
-            label: 'Users',
-          },
-          component: {
-            render(c) {
-              return c('router-view');
-            },
-          },
-          children: [
-            {
-              path: '',
-              name: 'Users',
-              component: Users,
-            },
-            {
-              path: ':email',
-              meta: {
-                label: 'User Details',
-              },
-              name: 'User',
-              component: User,
-            },
-          ],
-        },
-        {
           path: 'components',
-          redirect: '/components/cards',
           name: 'Components',
           component: {
             render(c) {
@@ -106,21 +64,6 @@ function configRoutes() {
             },
           },
           children: [
-            {
-              path: 'tables',
-              name: 'Tables',
-              component: Tables,
-            },
-            {
-              path: 'tabs',
-              name: 'Tabs',
-              component: Tabs,
-            },
-            {
-              path: 'breadcrumbs',
-              name: 'Breadcrumbs',
-              component: Breadcrumbs,
-            },
             {
               path: 'products',
               name: 'products',
@@ -162,13 +105,13 @@ function configRoutes() {
               component: RequestList,
             },
             {
-              path: 'productsList',
-              name: 'ProductsList',
+              path: 'products-list',
+              name: 'Products List',
               component: ProductsList,
             },
             {
-              path: 'productsUpdate',
-              name: 'ProductsUpdate',
+              path: 'products-update/:id',
+              name: 'Update Product',
               component: ProductsUpdate,
             },
             {
@@ -195,6 +138,16 @@ function configRoutes() {
               path: 'bankUpdate',
               name: 'BankUpdate',
               component: BankUpdate,
+            },
+            {
+              path: 'users',
+              name: 'Users',
+              component: Users,
+            },
+            {
+              path: 'users/:email',
+              name: 'User',
+              component: User,
             },
           ],
         },

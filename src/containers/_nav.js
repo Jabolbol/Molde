@@ -15,31 +15,13 @@ export default [
       {
         _name: 'CSidebarNavItem',
         name: 'Toko',
-        to: '/base/tables',
+        to: '/components/shops',
         icon: 'cil-star',
       },
       {
         _name: 'CSidebarNavItem',
         name: 'User',
-        to: '/users',
-        icon: 'cil-star',
-      },
-      {
-        _name: 'CSidebarNavItem',
-        name: 'Products',
-        to: '/components/productsList',
-        icon: 'cil-star',
-      },
-      {
-        _name: 'CSidebarNavItem',
-        name: 'Orders',
-        to: '/components/orders',
-        icon: 'cil-star',
-      },
-      {
-        _name: 'CSidebarNavItem',
-        name: 'Discussion',
-        to: '/components/discussion',
+        to: '/components/users',
         icon: 'cil-star',
       },
       {

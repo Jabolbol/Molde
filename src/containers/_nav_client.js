@@ -15,13 +15,13 @@ export default [
       {
         _name: 'CSidebarNavItem',
         name: 'User',
-        to: '/users',
+        to: '/components/users',
         icon: 'cil-star',
       },
       {
         _name: 'CSidebarNavItem',
         name: 'Products',
-        to: '/components/productsList',
+        to: '/components/products-list',
         icon: 'cil-star',
       },
       {

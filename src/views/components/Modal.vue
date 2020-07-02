@@ -2,7 +2,7 @@
   <transition name="modal-fade">
     <div class="modal-backdrop">
       <div
-        class="modal"
+        class="custom-modal"
         role="dialog"
         aria-labelledby="modalTitle"
         aria-describedby="modalDescription"
@@ -52,12 +52,13 @@
   align-items: center;
 }
 
-.modal {
+.custom-modal {
   background: #ffffff;
   box-shadow: 2px 2px 20px 1px;
-  overflow-x: auto;
+  overflow: auto;
   display: flex;
   flex-direction: column;
+  border-radius: 5px;
 }
 
 .modal-header,
@@ -68,7 +69,6 @@
 
 .modal-header {
   border-bottom: 1px solid #eeeeee;
-  color: #4aae9b;
   justify-content: space-between;
 }
 
@@ -88,7 +88,6 @@
   padding: 20px;
   cursor: pointer;
   font-weight: bold;
-  color: #4aae9b;
   background: transparent;
 }
 

@@ -6,7 +6,7 @@
     <CHeaderNav class="d-md-down-none mr-auto" />
     <CHeaderNav class="mr-4">
       <CHeaderNavItem class="px-3">
-        <CHeaderNavLink v-if="!shopAvailable" to="/components/request">Request Toko</CHeaderNavLink>
+        <CHeaderNavLink v-if="!admin && !shopAvailable" to="/components/request">Request Toko</CHeaderNavLink>
       </CHeaderNavItem>
       <TheHeaderDropdownAccount />
     </CHeaderNav>
@@ -24,14 +24,20 @@ export default {
   },
   data() {
     return {
-      shopAvailable: false
+      shopAvailable: false,
+      admin: false
     }
   },
   methods: {
+    isAdmin() {
+      const role = localStorage.getItem("role");
+      if(role === "ROLE_ADMIN") {
+        this.admin = true;
+      }
+    },
     hasShop() {
       axios.get("/account/has-shop")
         .then(((response) => {
-          console.log(response);
           if(response.data.data) {
             this.shopAvailable = true
           }
@@ -42,6 +48,7 @@ export default {
     }
   },
   created() {
+    this.isAdmin();
     this.hasShop();
   }
 };

@@ -25,7 +25,6 @@
 </template>
 
 <script>
-    import usersData from './UsersData'
     import axios from 'axios';
 
     export default {
@@ -68,7 +67,7 @@
                 }
             },
             rowClicked(item, index) {
-                this.$router.push({path: `users/${index + 1}`})
+                this.$router.push({path: `/components/users/${index + 1}`})
             },
             pageChange(val) {
                 this.$router.push({query: {page: val}})

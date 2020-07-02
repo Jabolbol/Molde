@@ -1,6 +1,6 @@
 <template>
     <CRow>
-<!--        <CCol>-->
+        <CCol>
             <CCard>
                 <CCardHeader>
                     <CRow>
@@ -37,152 +37,54 @@
                     </CRow>
                 </CCardBody>
             </CCard>
-
-<!--        </CCol>-->
-
-
+        </CCol>
 
         <modal v-show="isModalVisible" @close="closeModal">
             <template v-slot:header>
-                <h1>Detail Produk</h1>
+                <h1 style="margin-top: 15px;">Detail Produk</h1>
                 <button type="button" class="btn-close" @click="closeModal">X</button>
             </template>
             <template v-slot:body>
-                <div class="row">
-                    <div class="col-md-4">
-                        <img :src="'http://localhost:9000' + currProduct.image" :alt="currProduct.name"
-                             class="card-img-top">
-                    </div>
-                    <div class="col-sm-6">
-                        <h3> {{currProduct.name}} </h3>
-                        <br>
-                        <div class="form-group">
-                            <label>Berat</label>
-                            <input class="form-control"
-                                   v-model="currProduct.weight"
-                                   disabled
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label>Harga</label>
-                            <input type="text" class="form-control"
-                                   v-model="currProduct.price"
-                                   disabled
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label>Stock</label>
-                            <input type="text" class="form-control"
-                                   v-model="currProduct.stock"
-                                   disabled
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label>Deskripsi</label>
-                            <input type="text" class="form-control"
-                                   v-model="currProduct.description"
-                                   disabled
-                                   horizontal
-                            />
-                        </div>
-                    </div>
-                </div>
+                <CRow class="modal-row">
+                    <CCol col="6">
+                        <img class="card-img-top" :src="'http://localhost:9000' + currProduct.image" :alt="currProduct.name">
+                    </CCol>
+                    <CCol col="6">
+                        <h4>Nama</h4>
+                        <CInput
+                            :value="currProduct.name"
+                            readonly
+                        />
+                        <h4>Deskripsi</h4>
+                        <CTextarea
+                                :value="currProduct.description"
+                                rows="6"
+                                readonly
+                        />
+                        <h4>Berat</h4>
+                        <CInput
+                                :value="currProduct.weight"
+                                readonly
+                        />
+                        <h4>Harga</h4>
+                        <CInput
+                                :value="currProduct.price"
+                                readonly
+                        />
+                        <h4>Stok</h4>
+                        <CInput
+                                :value="currProduct.stock"
+                                readonly
+                        />
+                    </CCol>
+                </CRow>
             </template>
             <template v-slot:footer>
-                <router-link class="btn btn-warning" :to="'productsUpdate/'+currProduct.id">Update</router-link>
-                <button class="btn btn-danger" v-on:click="deleteData(product.id)">Delete</button>
+                <button class="btn btn-danger" v-on:click="deleteData(product.id)">Hapus</button>
+                <router-link class="btn btn-warning" style="color: white" :to="'products-update/' + currProduct.id">Ubah</router-link>
             </template>
         </modal>
     </CRow>
-
-<!--    <div class="products row">-->
-<!--        <div class="col-md-12">-->
-<!--            <div class="row">-->
-<!--                <div class="col-md-8">-->
-<!--                    <h1>Daftar Produk</h1>-->
-<!--                </div>-->
-<!--                <div class="col-md-2">-->
-
-<!--                </div>-->
-<!--                <div class="col-md-2">-->
-
-<!--                </div>-->
-<!--            </div>-->
-<!--            <br/>-->
-<!--            <div class="row">-->
-<!--                <div class="col-md-3" v-for="product in products" :key="product.id">-->
-<!--                    <div class="card">-->
-<!--                        <img-->
-<!--                                :src="'http://localhost:9000' + product.image"-->
-<!--                                :alt="product.name"-->
-<!--                                class="card-img-top"-->
-<!--                        />-->
-<!--                        <div class="card-body">-->
-<!--                            <h4 class="card-title">{{ product.name }}</h4>-->
-<!--                            <div class="card-text">Rp. {{ product.price }}</div>-->
-<!--                            <div class="row justify-content-end">-->
-<!--                                &lt;!&ndash; <router-link class="btn btn-primary" to="productsUpdate">Detail</router-link> &ndash;&gt;-->
-<!--                                <button type="button" class="btn btn-primary" @click="showModal(product)">Detail-->
-<!--                                </button>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--            <modal v-show="isModalVisible" @close="closeModal">-->
-<!--                <template v-slot:header>-->
-<!--                    <h1>Detail Produk</h1>-->
-<!--                    <button type="button" class="btn-close" @click="closeModal">X</button>-->
-<!--                </template>-->
-<!--                <template v-slot:body>-->
-<!--                    <div class="row">-->
-<!--                        <div class="col-md-4">-->
-<!--                            <img :src="'http://localhost:9000' + currProduct.image" :alt="currProduct.name"-->
-<!--                                 class="card-img-top">-->
-<!--                        </div>-->
-<!--                        <div class="col-sm-6">-->
-<!--                            <h3> {{currProduct.name}} </h3>-->
-<!--                            <br>-->
-<!--                            <div class="form-group">-->
-<!--                                <label>Berat</label>-->
-<!--                                <input class="form-control"-->
-<!--                                       v-model="currProduct.weight"-->
-<!--                                       disabled-->
-<!--                                />-->
-<!--                            </div>-->
-<!--                            <div class="form-group">-->
-<!--                                <label>Harga</label>-->
-<!--                                <input type="text" class="form-control"-->
-<!--                                       v-model="currProduct.price"-->
-<!--                                       disabled-->
-<!--                                />-->
-<!--                            </div>-->
-<!--                            <div class="form-group">-->
-<!--                                <label>Stock</label>-->
-<!--                                <input type="text" class="form-control"-->
-<!--                                       v-model="currProduct.stock"-->
-<!--                                       disabled-->
-<!--                                />-->
-<!--                            </div>-->
-<!--                            <div class="form-group">-->
-<!--                                <label>Deskripsi</label>-->
-<!--                                <input type="text" class="form-control"-->
-<!--                                       v-model="currProduct.description"-->
-<!--                                       disabled-->
-<!--                                       horizontal-->
-<!--                                />-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </template>-->
-<!--                <template v-slot:footer>-->
-<!--                    <router-link class="btn btn-warning" :to="'productsUpdate/'+currProduct.id">Update</router-link>-->
-<!--                    <button class="btn btn-danger" v-on:click="deleteData(product.id)">Delete</button>-->
-<!--                </template>-->
-<!--            </modal>-->
-<!--        </div>-->
-<!--    </div>-->
 </template>
 
 <script>
@@ -264,9 +166,9 @@
 </script>
 
 <style scoped>
-    .products {
+    .modal-row {
+        max-width: 50vw;
+        overflow-y: scroll;
         padding: 10px;
-        background: white;
-        border-radius: 10px;
     }
 </style>
