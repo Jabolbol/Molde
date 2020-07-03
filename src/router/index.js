@@ -11,7 +11,6 @@ const Dashboard = () => import('@/views/Dashboard');
 const Products = () => import('@/views/components/Products');
 const Create = () => import('@/views/components/Create');
 const Orders = () => import('@/views/components/Orders');
-const Shipment = () => import('@/views/components/ContohForm');
 const DetailOrder = () => import('@/views/components/DetailOrder');
 const UpdateResi = () => import('@/views/components/UpdateResi');
 const RequestList = () => import('@/views/components/RequestList');
@@ -21,8 +20,7 @@ const ProductsUpdate = () => import('@/views/components/ProductsUpdate');
 const Discussion = () => import('@/views/components/Discussion');
 const DiscussionDetail = () => import('@/views/components/DiscussionDetail');
 const ListBank = () => import('@/views/components/ListBank');
-const Bank = () => import('@/views/components/Bank');
-const BankUpdate = () => import('@/views/components/BankUpdate');
+const Category = () => import('@/views/components/Category');
 
 // Pages
 const Login = () => import('@/views/pages/Login');
@@ -80,11 +78,6 @@ function configRoutes() {
               component: Orders,
             },
             {
-              path: 'shipment',
-              name: 'Shipment',
-              component: Shipment,
-            },
-            {
               path: 'detailOrder',
               name: 'DetailOrder',
               component: DetailOrder,
@@ -125,19 +118,9 @@ function configRoutes() {
               component: DiscussionDetail,
             },
             {
-              path: 'listBank',
-              name: 'ListBank',
+              path: 'list-bank',
+              name: 'List Bank',
               component: ListBank,
-            },
-            {
-              path: 'bank',
-              name: 'Bank',
-              component: Bank,
-            },
-            {
-              path: 'bankUpdate',
-              name: 'BankUpdate',
-              component: BankUpdate,
             },
             {
               path: 'users',
@@ -149,6 +132,10 @@ function configRoutes() {
               name: 'User',
               component: User,
             },
+            {
+              path: 'category',
+              component: Category
+            }
           ],
         },
       ],

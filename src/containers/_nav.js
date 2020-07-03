@@ -20,14 +20,14 @@ export default [
       },
       {
         _name: 'CSidebarNavItem',
-        name: 'User',
-        to: '/components/users',
+        name: 'Kategori',
+        to: '/components/Category',
         icon: 'cil-star',
       },
       {
         _name: 'CSidebarNavItem',
         name: 'Bank',
-        to: '/components/listBank',
+        to: '/components/list-bank',
         icon: 'cil-star',
       },
       {
