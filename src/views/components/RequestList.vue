@@ -1,19 +1,21 @@
 <template>
     <div>
-        <!-- disini saya menggunakan bootstrap untuk design tabel nya. secara default bootstrap sudah di include di file welcome.blade.php jadi saya tidak perlu lagi untuk import file nya -->
-        <div class="row">
-            <div class="col-md-12">
+        <Crow>
+            <Ccol>
+                <CCard>
+                <CCardHeader>
                 <div class="row">
                     <div class="col-md-10">
-                        <h3>Daftar Request</h3>
+                        <h4>Daftar Request</h4>
                     </div>
                 </div>
-                <br>
+                </CCardHeader>
+                <CCardBody>
                 <table class="table">
                     <thead>
                     <tr>
                         <th scope="col">Nama Aplikasi</th>
-                        <th scope="col">Backgroud</th>
+                        <th scope="col">Background</th>
                         <th scope="col">Font Color</th>
                         <th scope="col">Prod Layout</th>
                         <th scope="col">Kategory</th>
@@ -29,14 +31,16 @@
                         <td>{{request.customization.prodLayout}}</td>
                         <td>{{request.customization.category.name}}</td>
                         <td style=" width:20%">
-                            <button class="btn btn-primary" v-on:click="acceptRequest(request.id)">Accept</button>
-                            <button class="btn btn-danger" v-on:click="cancelRequest(request.id)">Cancel</button>
+                            <button class="btn btn-success" v-on:click="acceptRequest(request.id)">Accept</button>
+                            <button class="btn btn-danger" v-on:click="cancelRequest(request.id)">Reject</button>
                         </td>
                     </tr>
                     </tbody>
                 </table>
-            </div>
-        </div>
+                </CCardBody>
+                </CCard>
+            </Ccol>
+        </Crow>
     </div>
 </template>
 

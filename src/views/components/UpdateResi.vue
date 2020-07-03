@@ -63,7 +63,7 @@
                         >
                     </div>
                     <div>
-                        <button class="btn btn-primary">Update Resi</button>
+                        <button class="btn btn-primary" v-on:click="updateData()">Update Resi</button>
                     </div>
                 </form>
             </div>
@@ -104,10 +104,11 @@
                     });
             },
             updateData() {
+                const formData = new FormData();
+                formData.set('airwayBill', this.airwayBill);
                 axios
-                    .post("http://localhost:9000/molde/api/v1/order/" + this.$route.params.id + "/airway-bill", {
-                        airwayBill: this.airwayBill,
-                    }).then(response => {
+                    .post("http://localhost:9000/molde/api/v1/order/" + this.$route.params.id + "/airway-bill", formData)
+                    .then(response => {
                         this.$router.push('/components/orders')
                     });
             }

@@ -14,20 +14,22 @@ const Widgets = () => import('@/views/widgets/Widgets');
 const Breadcrumbs = () => import('@/views/components/Breadcrumbs');
 const Tables = () => import('@/views/components/Tables');
 const Tabs = () => import('@/views/components/Table');
+const Forms = () => import('@/views/components/Forms');
 const Products = () => import('@/views/components/Products');
-const Create = () => import('@/views/components/Create');
-const Orders = () => import('@/views/components/Orders');
-const Shipment = () => import('@/views/components/ContohForm');
-const DetailOrder = () => import('@/views/components/DetailOrder');
+const ProductCreate = () => import('@/views/components/ProductCreate');
+const ProductList = () => import('@/views/components/ProductList');
+const ProductDetail = () => import('@/views/components/ProductDetail');
+const ProductUpdate = () => import('@/views/components/ProductUpdate');
+const Order = () => import('@/views/components/Order');
+const OrderInProgress = () => import('@/views/components/OrderInProgress');
+const OrderDetail = () => import('@/views/components/OrderDetail');
 const UpdateResi = () => import('@/views/components/UpdateResi')
 const RequestList = () => import('@/views/components/RequestList')
 const RequestToko = () => import('@/views/components/RequestToko');
-const ProductsList = () => import('@/views/components/ProductsList');
-const ProductsUpdate = () => import('@/views/components/ProductsUpdate');
 const Discussion = () => import('@/views/components/Discussion');
 const DiscussionDetail = () => import('@/views/components/DiscussionDetail');
-const ListBank = () => import('@/views/components/ListBank');
 const Bank = () => import('@/views/components/Bank');
+const Category = () => import('@/views/components/Category');
 
 // Pages
 const Login = () => import('@/views/pages/Login');
@@ -121,29 +123,49 @@ function configRoutes() {
               component: Breadcrumbs,
             },
             {
+              path: 'forms',
+              name: 'Forms',
+              component: Forms,
+            },
+            {
               path: 'products',
               name: 'products',
               component: Products,
             },
             {
-              path: 'create',
-              name: 'Create',
-              component: Create,
+              path: 'productCreate',
+              name: 'ProductCreate',
+              component: ProductCreate,
             },
             {
-              path: 'orders',
-              name: 'Orders',
-              component: Orders,
+              path: 'productList',
+              name: 'ProductList',
+              component: ProductList,
             },
             {
-              path: 'shipment',
-              name: 'Shipment',
-              component: Shipment,
+              path: 'productDetail/:id',
+              name: 'ProductDetail',
+              component: ProductDetail,
             },
             {
-              path: 'detailOrder',
-              name: 'DetailOrder',
-              component: DetailOrder,
+              path: 'productUpdate/:id',
+              name: 'ProductUpdate',
+              component: ProductUpdate,
+            },
+            {
+              path: 'order',
+              name: 'Order',
+              component: Order,
+            },
+            {
+              path: 'orderInProgress',
+              name: 'OrderInProgress',
+              component: OrderInProgress,
+            },
+            {
+              path: 'orderDetail/:id',
+              name: 'OrderDetail',
+              component: OrderDetail,
             },
             {
                 path: 'updateResi/:id',
@@ -161,16 +183,6 @@ function configRoutes() {
               component: RequestList,
             },
             {
-              path: 'productsList',
-              name: 'ProductsList',
-              component: ProductsList,
-            },
-            {
-              path: 'productsUpdate',
-              name: 'ProductsUpdate',
-              component: ProductsUpdate,
-            },
-            {
               path: 'discussion',
               name: 'Discussion',
               component: Discussion,
@@ -181,14 +193,14 @@ function configRoutes() {
               component: DiscussionDetail,
             },
             {
-              path: 'listBank',
-              name: 'ListBank',
-              component: ListBank,
-            },
-            {
               path: 'bank',
               name: 'Bank',
               component: Bank,
+            },
+            {
+              path: 'category',
+              name: 'Category',
+              component: Category,
             },
           ],
         },

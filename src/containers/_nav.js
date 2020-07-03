@@ -6,7 +6,7 @@ export default [
         _name: 'CSidebarNavItem',
         name: 'Dashboard',
         to: '/dashboard',
-        // icon: 'cil-speedometer',
+        icon: 'cil-speedometer',
         // badge: {
         //   color: 'primary',
         //   text: 'NEW',
@@ -14,60 +14,58 @@ export default [
       },
       {
         _name: 'CSidebarNavTitle',
-        _children: ['Molde'],
+        _children: ['Admin'],
+      },
+      // {
+      //   _name: 'CSidebarNavItem',
+      //   name: 'User',
+      //   to: '/users',
+      //   icon: 'cil-chart-pie',
+      // },
+      {
+        _name: 'CSidebarNavItem',
+        name: 'Daftar Request',
+        to: '/components/requestList',
+        icon: 'cil-star'
       },
       {
         _name: 'CSidebarNavItem',
-        name: 'Toko',
-        to: '/base/tables',
-        icon: 'cil-chart-pie',
-      },
-      {
-        _name: 'CSidebarNavItem',
-        name: 'User',
-        to: '/users',
-        icon: 'cil-chart-pie',
-      },
-      {
-        _name: 'CSidebarNavItem',
-        name: 'Register',
-        to: '/pages/register',
-        icon: 'cil-chart-pie',
-      },
-      {
-        _name: 'CSidebarNavItem',
-        name: 'Logout',
-        to: '/',
-        icon: 'cil-chart-pie',
-      },
-      {
-        _name: 'CSidebarNavItem',
-        name: 'Products',
-        to: '/components/productsList',
-        icon: 'cil-star',
-      },
-      {
-        _name: 'CSidebarNavItem',
-        name: 'Orders',
-        to: '/components/orders',
-        icon: 'cil-star',
-      },
-      {
-        _name: 'CSidebarNavItem',
-        name: 'Discussion',
-        to: '/components/discussion',
-        icon: 'cil-star',
+        name: 'Category',
+        to: '/components/category',
+        icon: 'cil-star'
       },
       {
         _name: 'CSidebarNavItem',
         name: 'Bank',
-        to: '/components/listBank',
+        to: '/components/bank',
         icon: 'cil-star'
       },
-      {
-        _name: 'CSidebarNavDivider',
-        _class: 'm-2',
-      },
+      // {
+      //   _name: 'CSidebarNavTitle',
+      //   _children: ['Shop Owner'],
+      // },
+      // {
+      //   _name: 'CSidebarNavItem',
+      //   name: 'Product',
+      //   to: '/components/productList',
+      //   icon: 'cil-star',
+      // },
+      // {
+      //   _name: 'CSidebarNavItem',
+      //   name: 'Order',
+      //   to: '/components/order',
+      //   icon: 'cil-star',
+      // },
+      // {
+      //   _name: 'CSidebarNavItem',
+      //   name: 'Discussion',
+      //   to: '/components/discussion',
+      //   icon: 'cil-star',
+      // },
+      // {
+      //   _name: 'CSidebarNavDivider',
+      //   _class: 'm-2',
+      // },
     ],
   },
 ];

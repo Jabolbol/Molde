@@ -2,7 +2,6 @@
     <div>
         <div class="row">
             <div class="col-md-6">
-                <br><br>
                 <h4>Create new data</h4>
                 <br>
                 <!-- prevent form submit untuk reload halaman, kemudian memanggil function addData() -->
@@ -104,7 +103,7 @@
                 })
                 .then(response => {
                     // push router ke read data
-                    this.$router.push("/components/productsList");
+                    this.$router.push("/components/productList");
                 });
             }
         }

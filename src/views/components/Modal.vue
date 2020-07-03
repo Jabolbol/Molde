@@ -66,11 +66,11 @@
   display: flex;
 }
 
-.modal-header {
-  border-bottom: 1px solid #eeeeee;
-  color: #4aae9b;
-  justify-content: space-between;
-}
+/*.modal-header {*/
+/*  border-bottom: 1px solid #eeeeee;*/
+/*  color: #4aae9b;*/
+/*  justify-content: space-between;*/
+/*}*/
 
 .modal-footer {
   border-top: 1px solid #eeeeee;
@@ -82,15 +82,7 @@
   padding: 20px 10px;
 }
 
-.btn-close {
-  border: none;
-  font-size: 20px;
-  padding: 20px;
-  cursor: pointer;
-  font-weight: bold;
-  color: #4aae9b;
-  background: transparent;
-}
+
 
 .btn-green {
   color: white;

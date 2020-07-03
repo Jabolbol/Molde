@@ -30,7 +30,8 @@
                         <td style>{{order.status}}</td>
                         <td style="width:20%">
                             <button class="btn btn-primary" v-on:click="acceptOrder(order.id)">Accept</button>
-                            <button type="button" class="btn btn-primary" @click="showModal(order)">Detail</button>
+<!--                            <button type="button" class="btn btn-primary" @click="showModal(order)">Detail</button>-->
+                            <router-link class="btn btn-primary" :to="'orderDetail/'+order.id">Detail</router-link>
                         </td>
                     </tr>
                     </tbody>

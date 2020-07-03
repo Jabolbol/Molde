@@ -74,6 +74,8 @@
                             <option value="1">Makanan & Minuman</option>
                             <option value="2">Fashion</option>
                             <option value="3">Elektronik</option>
+                            <option value="3">Perlengkapan Rumah</option>
+                            <option value="3">Ibu & Bayi</option>
                         </select>
 <!--                        <CSelect-->
 <!--                               :options="['Makanan & Minuman',-->
