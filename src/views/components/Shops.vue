@@ -4,7 +4,7 @@
       <CCol>
         <CCard>
           <CCardHeader>
-
+            <h1>Daftar Toko</h1>
           </CCardHeader>
           <CCardBody>
             <table class="table">
@@ -33,7 +33,7 @@
                     size="lg"
                     v-bind="labelIcon"
                     :checked="shop.isActive"
-                    v-on:update:checked="changeStatus"/>
+                    v-on:update:checked="changeStatus($event, shop.id)"/>
                 </td>
               </tr>
               </tbody>
@@ -64,7 +64,6 @@
         axios.get("/shop")
           .then((response) => {
             this.shops = response.data.data;
-            console.log(shops);
           })
           .catch((error) => {
             if (error.message === "Request failed with status code 401") {
@@ -73,8 +72,39 @@
             }
           })
       },
-      changeStatus(status, e) {
+      activateShop(shopId) {
+        axios.put(`/shop/activate?shopId=${shopId}`)
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            if (error.message === "Request failed with status code 401") {
+              console.log(error);
+              this.$router.push("/pages/login");
+            }
+          })
+      },
+      deactivateShop(shopId) {
+        const formData = new FormData;
+        formData.set("reason", "Blocked by administrator")
 
+        axios.put(`/shop/deactivate?shopId=${shopId}`, formData)
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            if (error.message === "Request failed with status code 401") {
+              console.log(error);
+              this.$router.push("/pages/login");
+            }
+          })
+      },
+      changeStatus(status, shopId) {
+        if(status === true) {
+          this.activateShop(shopId);
+        } else {
+          this.deactivateShop(shopId);
+        }
       }
     },
     created() {

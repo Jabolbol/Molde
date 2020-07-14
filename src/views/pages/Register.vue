@@ -7,14 +7,7 @@
             <CCardBody class="p-4">
               <h1>Register</h1>
               <p class="text-muted">Create your account</p>
-
               <CForm class="register-form" @submit="register">
-                <!-- <v-alert
-                                :value="userExist"
-                                color="error"
-                                icon="warning"
-                >This user already exists, try a different set of data.</v-alert>-->
-
                 <CInput
                   placeholder="Firstname"
                   :rules="[rules.required]"
@@ -75,7 +68,6 @@
                   v-model="number"
                   prepend="@"
                 ></CInput>
-                <!-- <p v-if="isAuthError===true" style="color: red; font-size: 14px">{{authMessageError}}</p> -->
                 <CRow>
                   <CCol col="6" class="text-left">
                     <CButton
@@ -92,7 +84,21 @@
                 </CRow>
               </CForm>
             </CCardBody>
-            <CCardFooter class="p-4"></CCardFooter>
+            <CCardFooter class="p-4">
+              <CAlert
+                :show.sync="dismissCountDown"
+                closeButton
+                :color="alertColor"
+              >
+                {{alertMessage}}
+                <CProgress
+                  color="info"
+                  :max="dismissSecs"
+                  :value="dismissCountDown"
+                  height="4px"
+                />
+              </CAlert>
+            </CCardFooter>
           </CCard>
         </CCol>
       </CRow>
@@ -116,14 +122,23 @@
       rules: {
         required: value => !!value || "Required",
         email: value => {
-          //   const pattern = /^(([^<>()[\]\\.,;:\$@"]+(\.[^<>()[\]\\.,;:\$@"]+)*)|
           const pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
           return pattern.test(value) || "Invalid e-mail.";
         }
-      }
+      },
+      dismissSecs: 0,
+      dismissCountDown: 0,
+      alertColor: '',
+      alertMessage: ''
     }),
     methods: {
       ...mapActions(['doRegister']),
+      showAlert(color, message) {
+        this.alertColor = color;
+        this.dismissCountDown = 3;
+        this.dismissSecs = 3;
+        this.alertMessage = message;
+      },
       register() {
         if (this.valid()) {
           const router = this.$router;
@@ -135,12 +150,17 @@
           bodyFormData.set("phoneNo", this.number);
           bodyFormData.set("confirm_password", this.confirm_password);
 
-          this.doRegister(bodyFormData).then(() => {
-            router.push("login")
-          }).catch((err) => {
-            console.log(err);
-            alert("Register failed");
-          });
+          this.doRegister(bodyFormData)
+            .then(() => {
+              router.push("login")
+            })
+            .catch((error) => {
+              if (error === "Email exists") {
+                this.showAlert("danger", "Email telah digunakan");
+              } else {
+                alert("Register failed");
+              }
+            });
         }
       },
       valid() {

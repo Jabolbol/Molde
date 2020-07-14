@@ -2,12 +2,25 @@
   <div>
     <CRow>
       <CCol>
+        <CAlert
+          :show.sync="dismissCountDown"
+          closeButton
+          :color="alertColor"
+        >
+          {{alertMessage}}
+          <CProgress
+            color="info"
+            :max="dismissSecs"
+            :value="dismissCountDown"
+            height="4px"
+          />
+        </CAlert>
         <CCard>
           <CCardHeader>
             <h1>Request Toko</h1>
           </CCardHeader>
           <CCardBody>
-            <CForm @submit.prevent="addData">
+            <CForm @submit.prevent="createRequest">
               <CInput
                 label="Nama Toko"
                 v-model="shopName"
@@ -23,18 +36,21 @@
               <CInput
                 label="Background Aplikasi"
                 v-model="appBackground"
+                disabled
                 required
                 horizontal
               />
               <CInput
                 label="Warna Tulisan"
                 v-model="appFontColor"
+                disabled
                 required
                 horizontal
               />
               <CInput
                 label="Layout Produk"
                 v-model="prodLayout"
+                disabled
                 required
                 horizontal
               />
@@ -66,14 +82,24 @@
         shopName: '',
         appName: '',
         appLogo: '',
-        appBackground: '',
-        appFontColor: '',
-        prodLayout: '',
+        appBackground: 'Putih',
+        appFontColor: 'Orange',
+        prodLayout: 'Linear Layout',
         category: '',
-        categories: []
+        categories: [],
+        dismissSecs: 0,
+        dismissCountDown: 0,
+        alertColor: '',
+        alertMessage: ''
       }
     },
     methods: {
+      showAlert(color, message) {
+        this.alertColor = color;
+        this.dismissCountDown = 3;
+        this.dismissSecs = 3;
+        this.alertMessage = message;
+      },
       getCategories() {
         axios.get("/category/get")
           .then((response) => {
@@ -87,7 +113,7 @@
             }
           })
       },
-      addData() {
+      createRequest() {
         const formData = new FormData();
         formData.set('shopName', this.shopName);
         formData.set('appName', this.appName);
@@ -97,13 +123,21 @@
         formData.set('prodLayout', this.prodLayout);
         formData.set('category', this.category);
 
-        axios({
-          method: 'post',
-          url: '/request/create',
-          data: formData,
-        })
-          .then(() => {
-            this.$router.push("/");
+        axios.post('/request/create', formData)
+          .then((response) => {
+            if (response.data.code === 400) {
+              const message = response.data.message;
+              if(message === "App name already exists") {
+                this.showAlert("danger", "Nama aplikasi telah digunakan");
+              } else {
+                this.showAlert("danger", "Nama toko telah digunakan");
+              }
+            } else {
+              this.$router.push("/");
+            }
+          })
+          .catch((error) => {
+            console.log(error);
           });
       }
     },

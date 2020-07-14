@@ -37,7 +37,6 @@ export default {
         }).then((resp) => {
           const token = resp.data.data.token;
           const role = resp.data.data.role;
-          console.log("INo")
 
           axios.defaults.headers.common['Authorization'] = token;
           localStorage.setItem('token', token);
@@ -54,6 +53,7 @@ export default {
     doLogout: ({commit}) => {
       localStorage.removeItem("token");
       localStorage.removeItem("role");
+      localStorage.removeItem("shop_active")
       commit("logout");
     },
     doRegister: ({commit}, request) => {
@@ -62,8 +62,12 @@ export default {
           method: 'post',
           url: 'account/client/register',
           data: request
-        }).then(() => {
-          resolve(true)
+        }).then((response) => {
+          if (response.data.code === 400) {
+            reject("Email exists");
+          } else {
+            resolve(true)
+          }
         }).catch((err) => {
           console.log(err);
           reject(err);
