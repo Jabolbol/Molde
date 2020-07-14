@@ -11,6 +11,7 @@ const Dashboard = () => import('@/views/Dashboard');
 const Products = () => import('@/views/components/Products');
 const Create = () => import('@/views/components/Create');
 const Orders = () => import('@/views/components/Orders');
+const Order = () => import('@/views/components/Order');
 const DetailOrder = () => import('@/views/components/DetailOrder');
 const UpdateResi = () => import('@/views/components/UpdateResi');
 const RequestList = () => import('@/views/components/RequestList');
@@ -21,6 +22,9 @@ const Discussion = () => import('@/views/components/Discussion');
 const DiscussionDetail = () => import('@/views/components/DiscussionDetail');
 const ListBank = () => import('@/views/components/ListBank');
 const Category = () => import('@/views/components/Category');
+const Profile = () => import('@/views/components/Profile');
+const Shop = () => import('@/views/components/Shop');
+const Shops = () => import('@/views/components/Shops');
 
 // Pages
 const Login = () => import('@/views/pages/Login');
@@ -35,7 +39,7 @@ Vue.use(Router);
 export default new Router({
   mode: 'hash', // https://router.vuejs.org/api/#mode
   linkActiveClass: 'active',
-  scrollBehavior: () => ({ y: 0 }),
+  scrollBehavior: () => ({y: 0}),
   routes: configRoutes(),
 });
 
@@ -46,7 +50,7 @@ function configRoutes() {
       redirect: '/dashboard',
       name: 'Home',
       component: TheContainer,
-      meta: { requiresAuth: true },
+      meta: {requiresAuth: true},
       children: [
         {
           path: 'dashboard',
@@ -78,6 +82,11 @@ function configRoutes() {
               component: Orders,
             },
             {
+              path: 'orders/:id',
+              name: 'Order',
+              component: Order,
+            },
+            {
               path: 'detailOrder',
               name: 'DetailOrder',
               component: DetailOrder,
@@ -93,8 +102,8 @@ function configRoutes() {
               component: RequestToko,
             },
             {
-              path: 'requestList',
-              name: 'RequestList',
+              path: 'request-list',
+              name: 'Request List',
               component: RequestList,
             },
             {
@@ -135,6 +144,18 @@ function configRoutes() {
             {
               path: 'category',
               component: Category
+            },
+            {
+              path: 'profile',
+              component: Profile
+            },
+            {
+              path: 'shop-list',
+              component: Shops
+            },
+            {
+              path: 'shop',
+              component: Shop
             }
           ],
         },
@@ -153,13 +174,13 @@ function configRoutes() {
           path: 'login',
           name: 'Login',
           component: Login,
-          meta: { requiresAuth: false },
+          meta: {requiresAuth: false},
         },
         {
           path: 'register',
           name: 'Register',
           component: Register,
-          meta: { requiresAuth: false },
+          meta: {requiresAuth: false},
         },
       ],
     },

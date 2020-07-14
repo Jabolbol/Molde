@@ -22,8 +22,8 @@
       />
     </CSidebarBrand>
 
-    <CRenderFunction flat v-if="isAdmin" :content-to-render="$options.nav" />
-    <CRenderFunction flat v-if="!isAdmin" :content-to-render="$options.navClient" />
+    <CRenderFunction flat v-if="isAdmin" :content-to-render="$options.nav"/>
+    <CRenderFunction flat v-if="!isAdmin" :content-to-render="$options.navClient"/>
     <CSidebarMinimizer
       class="d-md-down-none"
       @click.native="$store.commit('set', ['sidebarMinimize', !minimize])"
@@ -32,37 +32,37 @@
 </template>
 
 <script>
-import navClient from "./_nav_client";
-import nav from "./_nav";
+  import navClient from "./_nav_client";
+  import nav from "./_nav";
 
-export default {
-  name: "TheSidebar",
-  navClient,
-  nav,
-  data() {
-    return {
-      isAdmin: false
-    };
-  },
-  methods: {
-    checkRole() {
-      if (localStorage.getItem("role") === "ROLE_CLIENT") {
-        this.isAdmin = false;
-      } else {
-        this.isAdmin = true;
+  export default {
+    name: "TheSidebar",
+    navClient,
+    nav,
+    data() {
+      return {
+        isAdmin: false
+      };
+    },
+    methods: {
+      checkRole() {
+        if (localStorage.getItem("role") === "ROLE_CLIENT") {
+          this.isAdmin = false;
+        } else {
+          this.isAdmin = true;
+        }
+      }
+    },
+    created() {
+      this.checkRole();
+    },
+    computed: {
+      show() {
+        return this.$store.state.sidebarShow;
+      },
+      minimize() {
+        return this.$store.state.sidebarMinimize;
       }
     }
-  },
-  created() {
-    this.checkRole();
-  },
-  computed: {
-    show() {
-      return this.$store.state.sidebarShow;
-    },
-    minimize() {
-      return this.$store.state.sidebarMinimize;
-    }
-  }
-};
+  };
 </script>

@@ -1,137 +1,115 @@
-<template xmlns:src="http://www.w3.org/1999/xhtml">
-    <div>
-        <div class="row">
-            <div class="col-md-6">
-                <br>
-                <br>
-                <h4>Create new data</h4>
-                <br>
-                <!-- prevent form submit untuk reload halaman, kemudian memanggil function addData() -->
-                <form @submit.prevent="addData">
-                    <div class="form-group">
-                        <label>Shop Name</label>
-                        <input
-                                type="textfield"
-                                class="form-control"
-                                placeholder="Masukkan Nama Toko"
-                                v-model="shopName"
-                                required
-                        >
-                    </div>
-                    <div class="form-group">
-                        <label>App Name</label>
-                        <input
-                                type="textfield"
-                                class="form-control"
-                                placeholder="Masu kkan Nama Aplikasi"
-                                v-model="appName"
-                                required
-                        >
-                    </div>
-                    <div class="form-group">
-                        <label>Logo</label>
-                        <input
-                                type="textfield"
-                                class="form-control"
-                                placeholder="Masukkan Deskripsi"
-                                v-model="appLogo"
-                                required
-                        >
-                    </div>
-                    <div class="form-group">
-                        <label>Background</label>
-                        <input
-                                type="textfield"
-                                class="form-control"
-                                placeholder="Masukkan Deskripsi"
-                                v-model="appBackground"
-                                required
-                        >
-                    </div>
-                    <div class="form-group">
-                        <label>Font Color</label>
-                        <input
-                                type="textfield"
-                                class="form-control"
-                                placeholder="Masukkan Deskripsi"
-                                v-model="appFontColor"
-                                required
-                        >
-                    </div>
-                    <div class="form-group">
-                        <label>Layout</label>
-                        <input
-                                type="textfield"
-                                class="form-control"
-                                placeholder="Masukkan Deskripsi"
-                                v-model="prodLayout"
-                                required
-                        >
-                    </div>
-                    <div class="form-group">
-                        <label>Kategory</label>
-                        <select class="form-control" v-model="category">
-                            <option value="1">Makanan & Minuman</option>
-                            <option value="2">Fashion</option>
-                            <option value="3">Elektronik</option>
-                        </select>
-<!--                        <CSelect-->
-<!--                               :options="['Makanan & Minuman',-->
-<!--                               'Fashion',-->
-<!--                               'Elektronik',-->
-<!--                               'Kesehatan',-->
-<!--                               'Perlengkapan rumah']"-->
-<!--                               v-model="category"-->
-<!--                        />-->
-                    </div>
-                    <div>
-                        <button class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+<template>
+  <div>
+    <CRow>
+      <CCol>
+        <CCard>
+          <CCardHeader>
+            <h1>Request Toko</h1>
+          </CCardHeader>
+          <CCardBody>
+            <CForm @submit.prevent="addData">
+              <CInput
+                label="Nama Toko"
+                v-model="shopName"
+                required
+                horizontal
+              />
+              <CInput
+                label="Nama Aplikasi"
+                v-model="appName"
+                required
+                horizontal
+              />
+              <CInput
+                label="Background Aplikasi"
+                v-model="appBackground"
+                required
+                horizontal
+              />
+              <CInput
+                label="Warna Tulisan"
+                v-model="appFontColor"
+                required
+                horizontal
+              />
+              <CInput
+                label="Layout Produk"
+                v-model="prodLayout"
+                required
+                horizontal
+              />
+              <div role="group" class="form-group form-row">
+                <label class="col-form-label col-sm-3">Jenis Toko</label>
+                <div class="col-sm-9">
+                  <select class="form-control" v-model="category">
+                    <option v-for="option in categories" v-bind:value="option.id">
+                      {{option.name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <CButton style="float: right; margin: 10px 0px 0px;" type="submit" color="success">Tambah</CButton>
+            </CForm>
+          </CCardBody>
+        </CCard>
+      </CCol>
+    </CRow>
+  </div>
 </template>
 
 <script>
-    import axios from 'axios'
+  import axios from 'axios'
 
-    export default {
-        data() {
-            return {
-                shopName: '',
-                appName: '',
-                appLogo: '',
-                appBackground: '',
-                appFontColor: '',
-                prodLayout: '',
-                category: ''
+  export default {
+    data() {
+      return {
+        shopName: '',
+        appName: '',
+        appLogo: '',
+        appBackground: '',
+        appFontColor: '',
+        prodLayout: '',
+        category: '',
+        categories: []
+      }
+    },
+    methods: {
+      getCategories() {
+        axios.get("/category/get")
+          .then((response) => {
+            this.categories = response.data.data;
+            console.log(this.categories);
+          })
+          .catch((error) => {
+            if (error.message === "Request failed with status code 401") {
+              console.log(error);
+              this.$router.push("/pages/login");
             }
-        },
-        methods: {
-            addData() {
-                // post data ke api menggunakan axios
-                const formData = new FormData();
-                formData.set('shopName', this.shopName);
-                formData.set('appName', this.appName);
-                formData.set('appLogo', this.appLogo);
-                formData.set('appBackground', this.appBackground);
-                formData.set('appFontColor', this.appFontColor);
-                formData.set('prodLayout', this.prodLayout);
-                formData.set('category', this.category);
+          })
+      },
+      addData() {
+        const formData = new FormData();
+        formData.set('shopName', this.shopName);
+        formData.set('appName', this.appName);
+        formData.set('appLogo', this.appLogo);
+        formData.set('appBackground', this.appBackground);
+        formData.set('appFontColor', this.appFontColor);
+        formData.set('prodLayout', this.prodLayout);
+        formData.set('category', this.category);
 
-                axios({
-                    method: 'post',
-                    url: 'http://localhost:9000/molde/api/v1/request/create',
-                    data: formData,
-                })
-                    .then(response => {
-                        console.log(response)
-                        // push router ke read data
-                        this.$router.push("/");
-                    });
-            }
-        }
-    };
+        axios({
+          method: 'post',
+          url: '/request/create',
+          data: formData,
+        })
+          .then(() => {
+            this.$router.push("/");
+          });
+      }
+    },
+    created() {
+      this.getCategories();
+    }
+  };
 
 </script>

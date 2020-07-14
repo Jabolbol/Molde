@@ -15,34 +15,38 @@ Vue.config.performance = true;
 Vue.prototype.$log = console.log.bind(console);
 
 axios.defaults.baseURL = 'http://localhost:9000/molde/api/v1/';
+// axios.interceptors.response.use((response) => {
+//   response.headers
+// })
+
 
 // If token already available, set is as defaulit header
 const token = localStorage.getItem('token');
 if (token) {
-    axios.defaults.headers.common['Authorization'] = token;
+  axios.defaults.headers.common['Authorization'] = token;
 }
 
 // Check if user is authenticated before each route
 router.beforeEach((to, from, next) => {
-    if (to.matched.some((record) => record.meta.requiresAuth)) {
-        if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-            next('/pages/login');
-        } else {
-            next();
-        }
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      next('/pages/login');
     } else {
-        next();
+      next();
     }
+  } else {
+    next();
+  }
 });
 
 new Vue({
-    el: '#app',
-    template: '<App/>',
-    components: {
-        App,
-    },
-    router,
-    store,
-    icons,
-    render: (h) => h(App),
+  el: '#app',
+  template: '<App/>',
+  components: {
+    App,
+  },
+  router,
+  store,
+  icons,
+  render: (h) => h(App),
 }).$mount('#app');

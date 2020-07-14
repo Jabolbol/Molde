@@ -14,14 +14,20 @@ export default [
       },
       {
         _name: 'CSidebarNavItem',
+        name: 'Request',
+        to: '/components/request-list',
+        icon: 'cil-star',
+      },
+      {
+        _name: 'CSidebarNavItem',
         name: 'Toko',
-        to: '/components/shops',
+        to: '/components/shop-list',
         icon: 'cil-star',
       },
       {
         _name: 'CSidebarNavItem',
         name: 'Kategori',
-        to: '/components/Category',
+        to: '/components/category',
         icon: 'cil-star',
       },
       {
