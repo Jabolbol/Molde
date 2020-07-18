@@ -12,7 +12,7 @@
                 <CCardHeader>
                   <CRow>
                     <CCol>
-                      <h4>Permohonan toko</h4>
+                      <h4><b>Permohonan toko</b></h4>
                     </CCol>
                     <CCol>
                       <CBadge color="primary" class="float-right">{{requestStatus}}</CBadge>
@@ -20,8 +20,9 @@
                   </CRow>
                 </CCardHeader>
                 <CCardBody>
-                  <p>Nama Toko: {{activeRequest.shopName}}</p>
-                  <p>Nama Aplikasi: {{activeRequest.appName}}</p>
+                  <p><b>Nama Toko:</b> {{activeRequest.shopName}}</p>
+                  <p><b>Nama Aplikasi:</b> {{activeRequest.appName}}</p>
+                  <p<b>Keterangan:</b> Mohon tunggu, admin sedang mereview permohonan</p>
                 </CCardBody>
               </CCard>
             </CRow>
