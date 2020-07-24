@@ -19,25 +19,31 @@
                 <th scope="col">Font Color</th>
                 <th scope="col">Product Layout</th>
                 <th scope="col">Kategori</th>
+                <th scope="col">Status</th>
                 <th scope="col">Action</th>
               </tr>
               </thead>
               <tbody>
-              <tr v-for="request in requests" :key="request.id">
+              <tr v-if="request.shopName !== 'Default Shop'" v-for="request in requests" :key="request.id">
                 <td>{{request.appName}}</td>
                 <td>{{request.customization.appBackground}}</td>
                 <td>{{request.customization.appFontColor}}</td>
                 <td>{{request.customization.prodLayout}}</td>
                 <td>{{request.customization.category.name}}</td>
+                <td>{{request.status}}</td>
                 <td style=" width:20%">
-                  <button v-if="request.status != 1" class="btn btn-success" v-on:click="acceptRequest(request.id)">
+                  <button v-if="request.status == 0" class="btn btn-success" style="margin-right: 5px"
+                          v-on:click="acceptRequest(request.id)">
                     Accept
                   </button>
-                  &emsp;
-                  <button v-if="request.status != 1" class="btn btn-danger" v-on:click="rejectRequest(request.id)">
+
+                  <button v-if="request.status == 0" class="btn btn-danger" v-on:click="rejectRequest(request.id)">
                     Reject
                   </button>
-                  <button v-if="request.status == 1" class="btn btn-primary">Detail</button>
+
+                  <button v-if="request.status == 1" class="btn btn-success" v-on:click="showModal(request.id)">
+                    Complete
+                  </button>
                 </td>
               </tr>
               </tbody>
@@ -46,25 +52,64 @@
         </CCard>
       </CCol>
     </CRow>
+
+    <modal v-show="isModalVisible">
+      <template v-slot:header>
+        <h1 style="margin-top: 15px;">Update Download Url</h1>
+        <button type="button" class="btn-close" @click="closeModal">X</button>
+      </template>
+      <template v-slot:body>
+        <CRow>
+          <CCol>
+            <CForm>
+              <CInput
+                label="URL"
+                v-model="downloadUrl"
+                required
+                horizontal
+              />
+            </CForm>
+          </CCol>
+        </CRow>
+      </template>
+      <template v-slot:footer>
+        <CButton class="btn btn-primary float-right" @click="completeRequest">Confirm</CButton>
+      </template>
+    </modal>
+
   </div>
 </template>
 
 <script>
   import axios from 'axios'
+  import modal from './Modal'
 
   export default {
     data() {
       return {
+        isModalVisible: false,
+        downloadUrl: '',
+        requestId: 0,
         requests: [],
         status: 0,
       };
+    },
+    components: {
+      modal
     },
     created() {
       this.loadData();
     },
     methods: {
+      showModal(id) {
+        this.requestId = id;
+        this.isModalVisible = true;
+      },
+      closeModal() {
+        this.isModalVisible = false;
+      },
       loadData() {
-        axios.get(`/request/get?status=${this.status}`)
+        axios.get(`/request/get/active`)
           .then(response => {
             this.requests = response.data.data;
           })
@@ -77,7 +122,18 @@
       },
       acceptRequest(id) {
         axios.put(`/request/${id}/accept`)
-          .then(response => {
+          .then(() => {
+            this.loadData();
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      },
+      completeRequest() {
+        axios.put(`/request/${this.requestId}/complete?url=${this.downloadUrl}`)
+          .then(() => {
+            this.isModalVisible = false;
+            this.downloadUrl = '';
             this.loadData();
           })
           .catch((error) => {

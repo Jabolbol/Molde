@@ -33,24 +33,24 @@
                 required
                 horizontal
               />
-              <CInput
+              <CSelect
                 label="Background Aplikasi"
-                v-model="appBackground"
-                disabled
+                :options="backgroundList"
+                v-on:update:value="selectBackground($event)"
                 required
                 horizontal
               />
-              <CInput
+              <CSelect
                 label="Warna Tulisan"
-                v-model="appFontColor"
-                disabled
+                :options="fontColorList"
+                v-on:update:value="selectFontColor($event)"
                 required
                 horizontal
               />
-              <CInput
+              <CSelect
                 label="Layout Produk"
-                v-model="prodLayout"
-                disabled
+                :options="layoutList"
+                v-on:update:value="selectProdLayout($event)"
                 required
                 horizontal
               />
@@ -64,7 +64,9 @@
                   </select>
                 </div>
               </div>
-              <CButton style="float: right; margin: 10px 0px 0px;" type="submit" color="success">Tambah</CButton>
+              <CButton class="float-right" type="submit" color="success">Tambah</CButton>
+              <router-link class="btn btn-danger float-right" style="margin-right: 5px" to="/dashboard">Batal
+              </router-link>
             </CForm>
           </CCardBody>
         </CCard>
@@ -82,6 +84,19 @@
         shopName: '',
         appName: '',
         appLogo: '',
+        backgroundList: [
+          {label: 'Putih', value: 'white'},
+          {label: 'Merah', value: 'red'},
+          {label: 'Biru', value: 'blue'}
+        ],
+        fontColorList: [
+          {label: 'Putih', value: 'white'},
+          {label: 'Jingga', value: 'orange'},
+        ],
+        layoutList: [
+          {label: 'Linear Layout', value: 'linear'},
+          {label: 'Grid Layout', value: 'grid'},
+        ],
         appBackground: 'Putih',
         appFontColor: 'Orange',
         prodLayout: 'Linear Layout',
@@ -99,6 +114,15 @@
         this.dismissCountDown = 3;
         this.dismissSecs = 3;
         this.alertMessage = message;
+      },
+      selectBackground(data) {
+        this.appBackground = data;
+      },
+      selectFontColor(data) {
+        this.appFontColor = data;
+      },
+      selectProdLayout(data) {
+        this.prodLayout = data;
       },
       getCategories() {
         axios.get("/category/get")
@@ -127,7 +151,7 @@
           .then((response) => {
             if (response.data.code === 400) {
               const message = response.data.message;
-              if(message === "App name already exists") {
+              if (message === "App name already exists") {
                 this.showAlert("danger", "Nama aplikasi telah digunakan");
               } else {
                 this.showAlert("danger", "Nama toko telah digunakan");
