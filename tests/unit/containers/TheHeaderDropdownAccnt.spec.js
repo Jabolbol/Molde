@@ -5,9 +5,9 @@ import { shallowMount } from '@vue/test-utils';
 
 Vue.use(CoreuiVue)
 
-describe('TheHeaderDropdownAccnt.vue', () => {
+describe('TheHeaderDropdownAccount.vue', () => {
   it('has a name', () => {
-    expect(TheHeaderDropdownAccnt.name).toBe('TheHeaderDropdownAccnt')
+    expect(TheHeaderDropdownAccnt.name).toBe('TheHeaderDropdownAccount')
   })
   it('has a created hook', () => {
     expect(typeof TheHeaderDropdownAccnt.data).toMatch('function')
@@ -18,7 +18,7 @@ describe('TheHeaderDropdownAccnt.vue', () => {
     expect(defaultData.itemsCount).toBe(42)
   })
   test('renders correctly', () => {
-    const wrapper = shallowMount(TheHeaderDropdownAccnt)
+    const wrapper = shallowMount(TheHeaderDropdownAccount)
     expect(wrapper.element).toMatchSnapshot()
   })
 })

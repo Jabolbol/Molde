@@ -1,113 +1,104 @@
-<template xmlns:src="http://www.w3.org/1999/xhtml">
-    <div>
-        <div class="row">
-            <div class="col-md-6">
-                <br><br>
-                <h4>Create new data</h4>
-                <br>
-                <!-- prevent form submit untuk reload halaman, kemudian memanggil function addData() -->
-                <form @submit.prevent="addData">
-                    <div class="form-group">
-                        <label>Nama Barang</label>
-                        <input
-                                type="textfield"
-                                class="form-control"
-                                placeholder="Masukkan nama barang"
-                                v-model="name"
-                                required
-                        >
-                    </div>
-                    <div class="form-group">
-                        <label>Deskripsi</label>
-                        <input
-                                type="textfield"
-                                class="form-control"
-                                placeholder="Masukkan Deskripsi"
-                                v-model="description"
-                                required
-                        >
-                    </div>
-                    <div class="form-group">
-                        <label>Berat</label>
-                        <input
-                                type="textfield"
-                                class="form-control"
-                                placeholder="Masukkan Deskripsi"
-                                v-model="weight"
-                                required
-                        >
-                    </div>
-                    <div class="form-group">
-                        <label>Harga</label>
-                        <input
-                                type="textfield"
-                                class="form-control"
-                                placeholder="Masukkan Deskripsi"
-                                v-model="price"
-                                required
-                        >
-                    </div>
-                    <div class="form-group">
-                        <label>Stock</label>
-                        <input
-                                type="textfield"
-                                class="form-control"
-                                placeholder="Masukkan Deskripsi"
-                                v-model="stock"
-                                required
-                        >
-                    </div>
-                    <div class="form-group">
-                        <input type="file" accept="image/*" id="image" @change="uploadImage">
-                    </div>
-                    <div>
-                        <button class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+<template>
+  <div>
+    <CRow>
+      <CCol>
+        <CCard>
+          <CCardHeader>
+            <h1>Tambah Produk</h1>
+          </CCardHeader>
+          <CCardBody>
+            <CForm @submit.prevent="addData">
+              <CInput
+                label="Nama"
+                v-model="name"
+                required
+                horizontal
+              />
+              <CTextarea
+                label="Deskripsi"
+                description="Deskripsikan produk secara singkat padat dan jelas"
+                rows="6"
+                v-model="description"
+                required
+                horizontal
+              />
+              <CInput
+                label="Berat"
+                description="Masukkan berat dalam satuan gram, contoh: 1000 (1 Kg)"
+                v-model="weight"
+                required
+                horizontal
+              />
+              <CInput
+                label="Harga"
+                v-model="price"
+                required
+                horizontal
+              />
+              <CInput
+                type="number"
+                label="Stok"
+                v-model="stock"
+                required
+                horizontal
+              />
+              <CInputFile
+                label="Gambar"
+                custom
+                required
+                horizontal
+                @change="uploadImage"
+              />
+              <CButton style="float: right; margin: 10px 0px 0px;" type="submit" color="success">Tambah
+              </CButton>
+              <router-link class="btn btn-danger" style="float: right; margin: 10px 10px 0px;"
+                           to="/components/products-list">Batal
+              </router-link>
+            </CForm>
+          </CCardBody>
+        </CCard>
+      </CCol>
+    </CRow>
+  </div>
 </template>
 
 <script>
-    import axios from 'axios'
+  import axios from 'axios'
 
-    export default {
-        data() {
-            return {
-                name: '',
-                description: '',
-                weight: '',
-                price: '',
-                stock: '',
-                image: null
-            }
-        },
-        methods: {
-            uploadImage(event) {
-                this.image = event.target.files[0]
-            },
-            addData() {
-                // post data ke api menggunakan axios
-                const formData = new FormData();
-                formData.set('name', this.name);
-                formData.set('description', this.description);
-                formData.set('weight', this.weight);
-                formData.set('price', this.price);
-                formData.set('stock', this.stock);
-                formData.append('image', this.image, this.image.name);
+  export default {
+    data() {
+      return {
+        name: '',
+        description: '',
+        weight: '',
+        price: '',
+        stock: '',
+        image: null
+      }
+    },
+    methods: {
+      uploadImage(event) {
+        this.image = event[0]
+      },
+      addData() {
+        const formData = new FormData();
+        formData.set('name', this.name);
+        formData.set('description', this.description);
+        formData.set('weight', this.weight);
+        formData.set('price', this.price);
+        formData.set('stock', this.stock);
+        formData.append('image', this.image, this.image.name);
 
-                axios({
-                    method: 'post',
-                    url: 'http://localhost:9000/molde/api/v1/product/add',
-                    data: formData,
-                })
-                .then(response => {
-                    // push router ke read data
-                    this.$router.push("/components/productsList");
-                });
-            }
-        }
-    };
+        axios({
+          method: 'post',
+          url: 'http://localhost:9000/molde/api/v1/product/add',
+          data: formData,
+        })
+          .then(() => {
+            this.$router.push("/components/products-list");
+          });
+      }
+    }
+  };
 
 </script>

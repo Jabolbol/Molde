@@ -7,42 +7,39 @@ const TheContainer = () => import('@/containers/TheContainer');
 // Views
 const Dashboard = () => import('@/views/Dashboard');
 
-const Charts = () => import('@/views/charts/Charts');
-const Widgets = () => import('@/views/widgets/Widgets');
-
 // Views - Components
-const Breadcrumbs = () => import('@/views/components/Breadcrumbs');
-const Tables = () => import('@/views/components/Tables');
-const Tabs = () => import('@/views/components/Table');
 const Products = () => import('@/views/components/Products');
 const Create = () => import('@/views/components/Create');
 const Orders = () => import('@/views/components/Orders');
-const Shipment = () => import('@/views/components/ContohForm');
+const Order = () => import('@/views/components/Order');
 const DetailOrder = () => import('@/views/components/DetailOrder');
-const UpdateResi = () => import('@/views/components/UpdateResi')
-const RequestList = () => import('@/views/components/RequestList')
+const UpdateResi = () => import('@/views/components/UpdateResi');
+const RequestList = () => import('@/views/components/RequestList');
 const RequestToko = () => import('@/views/components/RequestToko');
 const ProductsList = () => import('@/views/components/ProductsList');
 const ProductsUpdate = () => import('@/views/components/ProductsUpdate');
 const Discussion = () => import('@/views/components/Discussion');
 const DiscussionDetail = () => import('@/views/components/DiscussionDetail');
 const ListBank = () => import('@/views/components/ListBank');
-const Bank = () => import('@/views/components/Bank');
+const Category = () => import('@/views/components/Category');
+const Profile = () => import('@/views/components/Profile');
+const Shop = () => import('@/views/components/Shop');
+const Shops = () => import('@/views/components/Shops');
 
 // Pages
 const Login = () => import('@/views/pages/Login');
 const Register = () => import('@/views/pages/Register');
 
 // Users
-const Users = () => import('@/views/users/Users');
-const User = () => import('@/views/users/User');
+const Users = () => import('@/views/components/Users');
+const User = () => import('@/views/components/User');
 
 Vue.use(Router);
 
 export default new Router({
   mode: 'hash', // https://router.vuejs.org/api/#mode
   linkActiveClass: 'active',
-  scrollBehavior: () => ({ y: 0 }),
+  scrollBehavior: () => ({y: 0}),
   routes: configRoutes(),
 });
 
@@ -53,6 +50,7 @@ function configRoutes() {
       redirect: '/dashboard',
       name: 'Home',
       component: TheContainer,
+      meta: {requiresAuth: true},
       children: [
         {
           path: 'dashboard',
@@ -60,44 +58,7 @@ function configRoutes() {
           component: Dashboard,
         },
         {
-          path: 'charts',
-          name: 'Charts',
-          component: Charts,
-        },
-        {
-          path: 'widgets',
-          name: 'Widgets',
-          component: Widgets,
-        },
-        {
-          path: 'users',
-          meta: {
-            label: 'Users',
-          },
-          component: {
-            render(c) {
-              return c('router-view');
-            },
-          },
-          children: [
-            {
-              path: '',
-              name: 'Users',
-              component: Users,
-            },
-            {
-              path: ':id',
-              meta: {
-                label: 'User Details',
-              },
-              name: 'User',
-              component: User,
-            },
-          ],
-        },
-        {
           path: 'components',
-          redirect: '/components/cards',
           name: 'Components',
           component: {
             render(c) {
@@ -105,21 +66,6 @@ function configRoutes() {
             },
           },
           children: [
-            {
-              path: 'tables',
-              name: 'Tables',
-              component: Tables,
-            },
-            {
-              path: 'tabs',
-              name: 'Tabs',
-              component: Tabs,
-            },
-            {
-              path: 'breadcrumbs',
-              name: 'Breadcrumbs',
-              component: Breadcrumbs,
-            },
             {
               path: 'products',
               name: 'products',
@@ -136,9 +82,9 @@ function configRoutes() {
               component: Orders,
             },
             {
-              path: 'shipment',
-              name: 'Shipment',
-              component: Shipment,
+              path: 'orders/:id',
+              name: 'Order',
+              component: Order,
             },
             {
               path: 'detailOrder',
@@ -146,9 +92,9 @@ function configRoutes() {
               component: DetailOrder,
             },
             {
-                path: 'updateResi/:id',
-                name: 'UpdateResi',
-                component: UpdateResi
+              path: 'updateResi/:id',
+              name: 'UpdateResi',
+              component: UpdateResi,
             },
             {
               path: 'request',
@@ -156,18 +102,18 @@ function configRoutes() {
               component: RequestToko,
             },
             {
-              path: 'requestList',
-              name: 'RequestList',
+              path: 'request-list',
+              name: 'Request List',
               component: RequestList,
             },
             {
-              path: 'productsList',
-              name: 'ProductsList',
+              path: 'products-list',
+              name: 'Products List',
               component: ProductsList,
             },
             {
-              path: 'productsUpdate',
-              name: 'ProductsUpdate',
+              path: 'products-update/:id',
+              name: 'Update Product',
               component: ProductsUpdate,
             },
             {
@@ -181,37 +127,60 @@ function configRoutes() {
               component: DiscussionDetail,
             },
             {
-              path: 'listBank',
-              name: 'ListBank',
+              path: 'list-bank',
+              name: 'List Bank',
               component: ListBank,
             },
             {
-              path: 'bank',
-              name: 'Bank',
-              component: Bank,
+              path: 'users',
+              name: 'Users',
+              component: Users,
             },
+            {
+              path: 'users/:email',
+              name: 'User',
+              component: User,
+            },
+            {
+              path: 'category',
+              component: Category
+            },
+            {
+              path: 'profile',
+              component: Profile
+            },
+            {
+              path: 'shop-list',
+              component: Shops
+            },
+            {
+              path: 'shop',
+              component: Shop
+            }
           ],
         },
+      ],
+    },
+    {
+      path: '/pages',
+      name: 'Pages',
+      component: {
+        render(c) {
+          return c('router-view');
+        },
+      },
+      children: [
         {
-          path: 'pages',
-          name: 'Pages',
-          component: {
-            render(c) {
-              return c('router-view');
-            },
-          },
-          children: [
-            {
-              path: 'login',
-              name: 'Login',
-              component: Login,
-            },
-            {
-              path: 'register',
-              name: 'Register',
-              component: Register,
-            },
-          ],
+          path: 'login',
+          name: 'Login',
+          component: Login,
+          meta: {requiresAuth: false},
+        },
+        {
+          path: 'register',
+          name: 'Register',
+          component: Register,
+          meta: {requiresAuth: false},
         },
       ],
     },

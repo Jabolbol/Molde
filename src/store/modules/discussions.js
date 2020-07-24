@@ -12,48 +12,53 @@ const getters = {
 };
 
 const actions = {
-  fetchDiscussions: ({ commit }) => {
+  fetchDiscussions: ({commit}) => {
     return new Promise((resolve, reject) => {
-      axios({ method: 'get', url: 'discussions' })
+      axios({method: 'get', url: 'discussions'})
         .then((resp) => {
           const discussions = resp.data.data;
           commit('setDiscussions', discussions);
+          resolve(true);
         })
-        .catch((err) => {
-          console.log(err);
+        .catch((error) => {
+          console.log(error);
+          reject(error);
         });
     });
   },
-  getDiscussionDetail: ({ commit }, discussionId) => {
+  getDiscussionDetail: ({commit}, discussionId) => {
     return new Promise((resolve, reject) => {
-      axios({ method: 'get', url: `discussions/${discussionId}` })
+      axios({method: 'get', url: `discussions/${discussionId}`})
         .then((resp) => {
           const discussion = resp.data.data;
           commit('setDiscussion', discussion);
           commit('setResponses', discussion.responses);
+          resolve(true);
         })
-        .catch((err) => {
-          console.log(err);
+        .catch((error) => {
+          console.log(error);
+          reject(error);
         });
     });
   },
-  replyDiscussion: ({ commit }, { discussionId, request }) => {
+  replyDiscussion: ({commit}, {discussionId, request}) => {
     return new Promise((resolve, reject) => {
       axios({
         method: 'post',
         url: `discussions/${discussionId}/reply`,
         data: request,
       })
-        .then((resp) => {
-          const response = resp.data.data;
-          commit('updResponses', response);
+        .then(() => {
           resolve(true);
         })
-        .catch((err) => {
-          console.log(err);
-          reject(err);
+        .catch((error) => {
+          console.log(error);
+          reject(error);
         });
     });
+  },
+  catchDiscussionReply: ({commit}, data) => {
+    commit('updResponses', data);
   },
 };
 
